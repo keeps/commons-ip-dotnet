@@ -1,0 +1,26 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CommonsIP4Net"
+        mc:Ignorable="d"
+        Title="CommonsIP" Height="700" Width="580">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Frame Name="MainFrame" Source="/CommonsIP4Net;component/Pages/Metadata.xaml" Grid.Row="0" Grid.ColumnSpan="2" AutomationProperties.Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        <Button Style="{StaticResource MetroButton}" Click="Previous_Click" Name="ButtonPrevious" Content="Previous" Grid.Column="1" Margin="0,10,90,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" IsEnabled="False" Width="75"/>
+        <Button Style="{StaticResource MetroButton}" Click="Next_Click" Name="ButtonNext" Content="Next" Grid.Column="1" Margin="0,10,10,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" IsEnabled="False"/>
+        <Label Name="HelpLabel" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="10,6,175,0" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Arial" Height="30" VerticalAlignment="Top" Background="White"/>
+    </Grid>
+
+
+</Window>
