@@ -28,6 +28,7 @@ Class SIP
 
         If result = True Then
             Dim filename As String = dlg.FileName
+            Me.LabelLocationPath.Content = filename
             Me.SipModel.FullPath = filename
         End If
 

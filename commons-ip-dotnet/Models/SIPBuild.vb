@@ -11,6 +11,7 @@ Public Class SIPBuild
 
     Public Event TotalItems(sender As Object, total As Integer)
     Public Event CurrentStatus(sender As Object, index As Integer)
+    Public Event SIPBuildEnd(sender As Object)
 
     Private myPackageDescriptionModel As PackageDescriptionModel
     Public ReadOnly Property PackageDescriptionModel As PackageDescriptionModel
@@ -56,6 +57,9 @@ Public Class SIPBuild
         mySIPModel = sIPModel
     End Sub
 
+    ''' <summary>
+    ''' Use all data to build the SIP file
+    ''' </summary>
     Public Sub Build()
 
         ' 1) instantiate E-ARK SIP object
@@ -106,17 +110,14 @@ Public Class SIPBuild
 
     Public Sub sipBuildRepresentationProcessingCurrentStatus(i As Integer) Implements SIPObserver.sipBuildRepresentationProcessingCurrentStatus
         log.Debug("Build status: sipBuildRepresentationProcessingCurrentStatus" & i)
-
     End Sub
 
     Public Sub sipBuildRepresentationProcessingEnded() Implements SIPObserver.sipBuildRepresentationProcessingEnded
         log.Debug("Build status: sipBuildRepresentationProcessingEnded")
-
     End Sub
 
     Public Sub sipBuildRepresentationsProcessingEnded() Implements SIPObserver.sipBuildRepresentationsProcessingEnded
         log.Debug("Build status: sipBuildRepresentationsProcessingEnded")
-
     End Sub
 
     Public Sub sipBuildPackagingStarted(i As Integer) Implements SIPObserver.sipBuildPackagingStarted
@@ -131,6 +132,6 @@ Public Class SIPBuild
 
     Public Sub sipBuildPackagingEnded() Implements SIPObserver.sipBuildPackagingEnded
         log.Debug("Build status: sipBuildPackagingEnded")
-
+        RaiseEvent SIPBuildEnd(Me)
     End Sub
 End Class

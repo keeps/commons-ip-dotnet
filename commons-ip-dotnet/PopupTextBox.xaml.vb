@@ -25,4 +25,10 @@
         End Try
     End Sub
 
+    Private Sub RepresentationNameTextBox_KeyDown(sender As Object, e As KeyEventArgs)
+        If e.Key = Key.Return Then
+            RepresentationName = RepresentationNameTextBox.Text
+            Me.Close()
+        End If
+    End Sub
 End Class

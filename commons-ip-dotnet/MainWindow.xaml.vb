@@ -8,6 +8,8 @@ Imports org.roda_project.commons_ip.utils.METSEnums
 Class MainWindow
     Private ReadOnly log As ILog = LogManager.GetLogger(GetType(MainWindow))
 
+    Private Property RestartWorkflow As Boolean
+
     Private myPages As List(Of ExtendedPage) = Nothing
     Private ReadOnly Property Pages As List(Of ExtendedPage)
         Get
@@ -96,6 +98,13 @@ Class MainWindow
     ''' Initialize pages
     ''' </summary>
     Private Sub InitializePagesAndCreateCurrentOrder()
+        myPages = Nothing
+        RestartWorkflow = False
+        HelpLabel.Content = String.Empty
+        ProgressBarStatus.Value = 0
+        ProgressBarStatus.Visibility = Visibility.Hidden
+        ButtonNext.Content = "Next"
+
         'Create all pages
         Me.presentationPage = New Presentation()
         Me.packageDescriptionPage = New PackageDescription()
@@ -134,21 +143,26 @@ Class MainWindow
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub Next_Click(sender As Object, e As RoutedEventArgs)
-        If CurrentPageIntex = TotalPages - 1 Then
-            log.Debug("Last PAGE!!!! Create a SIP file")
-            CrateSIP()
-        Else
-            If CurrentPageIntex < TotalPages - 1 Then
-                log.Debug("Change page to the next one")
-                CurrentPageIntex += 1
-                Me.MainFrame.NavigationService.Navigate(Pages(CurrentPageIntex))
-                Me.ButtonPrevious.IsEnabled = True
-            Else
-                log.Debug("No more pages available")
-            End If
+        If RestartWorkflow Then
+            CurrentPageIntex = 0
+            InitializePagesAndCreateCurrentOrder()
         End If
 
-        UpdateInfoFromSelectedPage()
+        If CurrentPageIntex = TotalPages - 1 Then
+                log.Debug("Last PAGE!!!! Create a SIP file")
+                CrateSIP()
+            Else
+                If CurrentPageIntex < TotalPages - 1 Then
+                    log.Debug("Change page to the next one")
+                    CurrentPageIntex += 1
+                    Me.MainFrame.NavigationService.Navigate(Pages(CurrentPageIntex))
+                    Me.ButtonPrevious.IsEnabled = True
+                Else
+                    log.Debug("No more pages available")
+                End If
+            End If
+
+            UpdateInfoFromSelectedPage()
     End Sub
 
     ''' <summary>
@@ -189,11 +203,17 @@ Class MainWindow
 
         AddHandler sipBuild.TotalItems, AddressOf SIPBuild_totalitems
         AddHandler sipBuild.CurrentStatus, AddressOf SIPBuild_CurrentStatus
+        AddHandler sipBuild.SIPBuildEnd, AddressOf SIPBuild_Ended
 
         sipBuild.Build()
         HelpLabel.Content = "SIP created with success :)"
     End Sub
 
+    Private Sub SIPBuild_Ended(sender As Object)
+        RestartWorkflow = True
+        ButtonNext.Content = "Restart"
+        ButtonNext.IsEnabled = True
+    End Sub
 
     Private Sub SIPBuild_CurrentStatus(sender As Object, index As Integer)
         ProgressBarStatus.Value = index
