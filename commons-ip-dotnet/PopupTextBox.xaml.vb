@@ -15,5 +15,14 @@
         Me.Close()
     End Sub
 
+    Private Sub RepresentationNameTextBox_TextChanged(sender As Object, e As TextChangedEventArgs)
+        Try
+            System.IO.Path.GetFullPath(RepresentationNameTextBox.Text)
+            SaveButton.IsEnabled = True
+        Catch ex As Exception
+            SaveButton.IsEnabled = False
+            HeaderControl.DescriptionHeader = "Please set a correct folder name, without invalid characters"
+        End Try
+    End Sub
 
 End Class

@@ -1,15 +1,18 @@
-﻿Class SIP
+﻿Imports System.IO
+
+Class SIP
     Inherits ExtendedPage
 
-    ''' <summary>
-    ''' Retrieve the selected file path
-    ''' </summary>
-    ''' <returns></returns>
-    Public ReadOnly Property SaveFilePath As String
-        Get
-            Return FilePath.Text.Substring(0, FilePath.Text.LastIndexOf("\"))
-        End Get
-    End Property
+    Public Property SipModel As SIPModel
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        SipModel = New SIPModel()
+    End Sub
 
     ''' <summary>
     ''' Open the windows dialog to choose the location and name of ZIP file
@@ -23,26 +26,17 @@
 
         Dim result = dlg.ShowDialog()
 
-
         If result = True Then
             Dim filename As String = dlg.FileName
-            FilePath.Text = filename
+            Me.SipModel.FullPath = filename
         End If
 
-    End Sub
-
-    ''' <summary>
-    ''' Fired when textbox with path is changed
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub FilePath_TextChanged(sender As Object, e As TextChangedEventArgs)
         CheckIfPageIsValid()
-    End Sub
 
+    End Sub
 
     Public Overrides Sub CheckIfPageIsValid()
-        If String.IsNullOrEmpty(FilePath.Text) OrElse Not FilePath.Text.Contains(".zip") Then
+        If String.IsNullOrEmpty(Me.SipModel.FullPath) Then
             IsValidPage = False
         Else
             IsValidPage = True
@@ -50,6 +44,6 @@
     End Sub
 
     Protected Overrides Sub UpdateModelObject()
-        Throw New NotImplementedException()
     End Sub
+
 End Class

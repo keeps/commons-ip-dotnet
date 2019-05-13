@@ -140,6 +140,7 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System" />
@@ -163,6 +164,7 @@
     <Compile Include="Models\OtherMetadataModel.vb" />
     <Compile Include="Models\PackageContentModel.vb" />
     <Compile Include="Models\PackageDescriptionModel.vb" />
+    <Compile Include="Models\SIPModel.vb" />
     <Compile Include="Pages\PackageContent.xaml.vb">
       <DependentUpon>PackageContent.xaml</DependentUpon>
     </Compile>
@@ -173,12 +175,6 @@
       <DependentUpon>DescriptiveMetadata.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ExtendedPage.vb" />
-    <Compile Include="Pages\Files.xaml.vb">
-      <DependentUpon>Files.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Metadata.xaml.vb">
-      <DependentUpon>Metadata.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\PackageDescription.xaml.vb">
       <DependentUpon>PackageDescription.xaml</DependentUpon>
     </Compile>
@@ -220,14 +216,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Files.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Metadata.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\PackageDescription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -253,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\DatagridStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Resources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -303,9 +295,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -319,6 +311,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Images\cropped-e-ark4all-logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\keeps_logo_black_en_large.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

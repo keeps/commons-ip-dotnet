@@ -66,7 +66,14 @@ Class MainWindow
         End Get
     End Property
 
+    Private ReadOnly Property SIPModel As SIPModel
+        Get
+            Return sipPage.SipModel
+        End Get
+    End Property
+
     'All the pages are ExtendedPage
+    Private presentationPage As Presentation
     Private packageDescriptionPage As PackageDescription
     Private descriptiveMetadataPage As DescriptiveMetadata
     Private otherMetadataPage As OtherMetadata
@@ -89,12 +96,14 @@ Class MainWindow
     ''' </summary>
     Private Sub InitializePagesAndCreateCurrentOrder()
         'Create all pages
+        Me.presentationPage = New Presentation()
         Me.packageDescriptionPage = New PackageDescription()
         Me.descriptiveMetadataPage = New DescriptiveMetadata()
         Me.otherMetadataPage = New OtherMetadata
         Me.packageContentPage = New PackageContent
         Me.sipPage = New SIP()
 
+        AddHandler presentationPage.ValidPageChanged, AddressOf ExtendedPage_ValidPageChanged
         AddHandler packageDescriptionPage.ValidPageChanged, AddressOf ExtendedPage_ValidPageChanged
         AddHandler descriptiveMetadataPage.ValidPageChanged, AddressOf ExtendedPage_ValidPageChanged
         AddHandler otherMetadataPage.ValidPageChanged, AddressOf ExtendedPage_ValidPageChanged
@@ -102,6 +111,7 @@ Class MainWindow
         AddHandler sipPage.ValidPageChanged, AddressOf ExtendedPage_ValidPageChanged
 
         'Add pages to list with correct order
+        Pages.Add(presentationPage)
         Pages.Add(packageDescriptionPage)
         Pages.Add(descriptiveMetadataPage)
         Pages.Add(otherMetadataPage)
@@ -208,7 +218,7 @@ Class MainWindow
         Next
 
         ' 2) build SIP, providing an output directory
-        Dim zipSIP = sip.build(Paths.get(sipPage.SaveFilePath))
+        Dim zipSIP = sip.build(Paths.get(SIPModel.FullDirectoryName), SIPModel.FilenameWithoutExtension)
 
         HelpLabel.Content = "SIP created with success :)"
 

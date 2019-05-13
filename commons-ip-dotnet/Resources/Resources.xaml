@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CommonsIP4Net">
+
+    <BitmapImage x:Key="EARK4ALL_LOGO" UriSource="pack://siteoforigin:,,,/Resources/Images/cropped-e-ark4all-logo.jpg"/>
+    <BitmapImage x:Key="KEEP_LOGO" UriSource="pack://siteoforigin:,,,/Resources/Images/keeps_logo_black_en_large.png"/>
+
+</ResourceDictionary>
