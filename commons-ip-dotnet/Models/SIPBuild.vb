@@ -11,7 +11,7 @@ Public Class SIPBuild
 
     Public Event TotalItems(sender As Object, total As Integer)
     Public Event CurrentStatus(sender As Object, index As Integer)
-    Public Event SIPBuildEnd(sender As Object)
+    Public Event SIPBuildEnd(sender As Object, ByVal exitStatus As SIPBuildExitStatus)
 
     Private myPackageDescriptionModel As PackageDescriptionModel
     Public ReadOnly Property PackageDescriptionModel As PackageDescriptionModel
@@ -95,9 +95,15 @@ Public Class SIPBuild
             sip.addRepresentation(representation)
         Next
 
-        ' 2) build SIP, providing an output directory
-        Dim zipSIP = sip.build(Paths.get(SIPModel.FullDirectoryName), SIPModel.FilenameWithoutExtension)
+        Try
+            ' 2) build SIP, providing an output directory
+            Dim zipSIP = sip.build(Paths.get(SIPModel.FullDirectoryName), SIPModel.FilenameWithoutExtension)
 
+        Catch ex As Exception
+            log.Error("Problem to create ZIP file")
+            log.Error("Current error", ex)
+            RaiseEvent SIPBuildEnd(Me, SIPBuildExitStatus.FAIL)
+        End Try
     End Sub
 
     Public Sub sipBuildRepresentationsProcessingStarted(i As Integer) Implements SIPObserver.sipBuildRepresentationsProcessingStarted
@@ -132,6 +138,11 @@ Public Class SIPBuild
 
     Public Sub sipBuildPackagingEnded() Implements SIPObserver.sipBuildPackagingEnded
         log.Debug("Build status: sipBuildPackagingEnded")
-        RaiseEvent SIPBuildEnd(Me)
+        RaiseEvent SIPBuildEnd(Me, SIPBuildExitStatus.SUCCESS)
     End Sub
 End Class
+
+Public Enum SIPBuildExitStatus
+    SUCCESS
+    FAIL
+End Enum

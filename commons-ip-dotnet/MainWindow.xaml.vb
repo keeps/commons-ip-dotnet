@@ -206,10 +206,14 @@ Class MainWindow
         AddHandler sipBuild.SIPBuildEnd, AddressOf SIPBuild_Ended
 
         sipBuild.Build()
-        HelpLabel.Content = "SIP created with success :)"
     End Sub
 
-    Private Sub SIPBuild_Ended(sender As Object)
+    Private Sub SIPBuild_Ended(sender As Object, sip As SIPBuildExitStatus)
+        If sip = SIPBuildExitStatus.SUCCESS Then
+            HelpLabel.Content = "SIP created with success :)"
+        Else
+            HelpLabel.Content = "Problem to create SIP file, check if all files have correct permissions :("
+        End If
         RestartWorkflow = True
         ButtonNext.Content = "Restart"
         ButtonNext.IsEnabled = True

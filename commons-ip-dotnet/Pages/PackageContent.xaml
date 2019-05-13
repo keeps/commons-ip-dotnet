@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CommonsIP4Net"
       mc:Ignorable="d" 
       d:DesignHeight="469.726" d:DesignWidth="756.849"
@@ -16,9 +17,15 @@
         <Grid Margin="0,10,0,0" Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="55"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <ComboBox Name="RepresentationContentTypeCombobox" Height="24" Margin="10,30,10,0" Grid.Row="0" VerticalAlignment="Top" SelectionChanged="MetadataTypeCombobox_SelectionChanged"/>
+            <ComboBox 
+                Name="RepresentationContentTypeCombobox" 
+                Margin="10,30,10,0" 
+                materialDesign:HintAssist.Hint="Please select the package content"
+                Grid.Row="0" 
+                VerticalAlignment="Top" 
+                SelectionChanged="MetadataTypeCombobox_SelectionChanged" Height="29" Grid.RowSpan="2"/>
             <DataGrid Name="PackageContentDataGrid" AllowDrop="True" Drop="DescriptiveMetadataFiles_Drop" Grid.Row="1" Background="White" Margin="10,30,10,10">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
@@ -44,9 +51,9 @@
                     <DataGridTextColumn IsReadOnly="True" Header="Filename" Width="10*" Binding="{Binding Path=FullName}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Label Content="Packge content type" HorizontalAlignment="Left" Grid.Row="0" Margin="10,4,0,0" VerticalAlignment="Top" Width="547"/>
-            <Label Content="Selecte file" HorizontalAlignment="Left" Margin="10,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="586"/>
-            <Label Name="DescriptiveMetadataLabel" AllowDrop="True" Drop="DescriptiveMetadataFiles_Drop" Content="Drop one file" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" FontSize="18" FontWeight="Bold" />
+            <Label Content="Packge content type" Padding="0,10,10,10" HorizontalAlignment="Left" Grid.Row="0" Margin="10,4,0,0" VerticalAlignment="Top" Width="547"/>
+            <Label Content="Selecte file" Padding="0,5,10,10" HorizontalAlignment="Left" Margin="10,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="586"/>
+            <Label Name="DescriptiveMetadataLabel" AllowDrop="True" Drop="DescriptiveMetadataFiles_Drop" Content="Drop one file" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" FontSize="18" FontWeight="Bold" Margin="0,10,0,0" />
         </Grid>
 
 

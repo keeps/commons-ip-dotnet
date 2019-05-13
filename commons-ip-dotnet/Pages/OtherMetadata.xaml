@@ -33,7 +33,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <!--<Label Content="Descriptive metadata type" HorizontalAlignment="Left" Grid.Row="0" Margin="10,4,0,0" VerticalAlignment="Top" Width="547"/>-->
-            <Label Content="Selecte file" HorizontalAlignment="Left" Margin="10,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="586"/>
+            <Label Content="Selected files" Padding="0,5,10,10" HorizontalAlignment="Left" Margin="10,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="586"/>
             <Label Name="DescriptiveMetadataLabel" AllowDrop="True" Drop="DescriptiveMetadataFiles_Drop" Content="Drop one file" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" FontSize="18" FontWeight="Bold" />
         </Grid>
 
