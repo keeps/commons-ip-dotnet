@@ -21,6 +21,6 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <local:HeaderControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TitleHeader="SIP creation" DescriptionHeader="Choose the path to save the SIP package" />
-        <Button Content="Location.." Style="{StaticResource MetroButton}" Grid.Row="2" Grid.Column="1" Click="SaveSIP_Click" Margin="25,24"/>
+        <Button Content="Location.." Style="{StaticResource MetroButton}" Grid.Row="2" Grid.Column="1" Click="SaveSIP_Click" Margin="25,24,25,0" Height="42" VerticalAlignment="Top"/>
     </Grid>
 </local:ExtendedPage>

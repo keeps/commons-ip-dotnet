@@ -164,6 +164,7 @@
     <Compile Include="Models\OtherMetadataModel.vb" />
     <Compile Include="Models\PackageContentModel.vb" />
     <Compile Include="Models\PackageDescriptionModel.vb" />
+    <Compile Include="Models\SIPBuild.vb" />
     <Compile Include="Models\SIPModel.vb" />
     <Compile Include="Pages\PackageContent.xaml.vb">
       <DependentUpon>PackageContent.xaml</DependentUpon>

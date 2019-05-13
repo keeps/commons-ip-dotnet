@@ -19,7 +19,8 @@
         <Frame Name="MainFrame" Source="/CommonsIP4Net;component/Pages/Metadata.xaml" Grid.Row="0" Grid.ColumnSpan="2" AutomationProperties.Name="MainFrame" NavigationUIVisibility="Hidden"/>
         <Button Style="{StaticResource MetroButton}" Click="Previous_Click" Name="ButtonPrevious" Content="Previous" Grid.Column="1" Margin="0,10,90,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" IsEnabled="False" Width="75"/>
         <Button Style="{StaticResource MetroButton}" Click="Next_Click" Name="ButtonNext" Content="Next" Grid.Column="1" Margin="0,10,10,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" IsEnabled="False"/>
-        <Label Name="HelpLabel" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="10,6,175,0" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Arial" Height="30" VerticalAlignment="Top" Background="White"/>
+        <Label Name="HelpLabel" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="10,10,170,0" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Arial" Height="20" VerticalAlignment="Top" Background="White" FontSize="10"/>
+        <ProgressBar Name="ProgressBarStatus" Visibility="Hidden" Height="4" Margin="14,35,170,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" BorderBrush="White" Foreground="#FF10D3FF"/>
     </Grid>
 
 

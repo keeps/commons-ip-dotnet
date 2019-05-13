@@ -89,6 +89,7 @@ Class MainWindow
         InitializePagesAndCreateCurrentOrder()
 
         Me.MainFrame.NavigationService.Navigate(Pages(CurrentPageIntex))
+
     End Sub
 
     ''' <summary>
@@ -184,46 +185,25 @@ Class MainWindow
         HelpLabel.Content = "Wainting, create SIP file..."
 
         ControlsUtils.UpdateUI()
+        Dim sipBuild As New SIPBuild(Me.PackageDescriptionModel, Me.DescriptiveMetadataModel, Me.OtherMetadataModel, Me.PackageContentModel, Me.SIPModel)
 
-        ' 1) instantiate E-ARK SIP object
-        Dim sip = New EARKSIP(PackageDescriptionModel.SIPID, IPContentType.getMIXED)
+        AddHandler sipBuild.TotalItems, AddressOf SIPBuild_totalitems
+        AddHandler sipBuild.CurrentStatus, AddressOf SIPBuild_CurrentStatus
 
-        ' 1.1) set optional human-readable description
-        sip.setDescription(PackageDescriptionModel.SIPDescription)
-
-
-        ' 1.2) add descriptive metadata (SIP level)
-        For Each file In DescriptiveMetadataModel.DescriptiveMetadataFile
-            Dim metadataDescriptiveDC = New IPDescriptiveMetadata(
-            New IPFile(Paths.get(file.FullName)),
-            New MetadataType(DescriptiveMetadataModel.DescriptiveMetadataType), Nothing)
-            sip.addDescriptiveMetadata(metadataDescriptiveDC)
-        Next
-
-        For Each file In OtherMetadataModel.OtherMetadataFiles
-            Dim metadataOtherFile = New IPFile(Paths.get(file.FullName))
-            ' 1.4.1) optionally one may rename file final name
-            Dim metadataOther = New IPMetadata(metadataOtherFile)
-            sip.addOtherMetadata(metadataOther)
-        Next
-
-        Dim agent = New IPAgent(PackageDescriptionModel.CreatorName, PackageDescriptionModel.CreatorType.ToString, "", CreatorType.valueOf(PackageDescriptionModel.CreatorType.ToString()), "")
-
-        For Each keyValue In PackageContentModel.RetrieveFilesByRepresentationName
-            Dim representation = New IPRepresentation(keyValue.Key)
-            For Each file In keyValue.Value
-                representation.addFile(New IPFile(Paths.get(file.FullName)))
-            Next
-            sip.addRepresentation(representation)
-        Next
-
-        ' 2) build SIP, providing an output directory
-        Dim zipSIP = sip.build(Paths.get(SIPModel.FullDirectoryName), SIPModel.FilenameWithoutExtension)
-
+        sipBuild.Build()
         HelpLabel.Content = "SIP created with success :)"
-
     End Sub
 
 
+    Private Sub SIPBuild_CurrentStatus(sender As Object, index As Integer)
+        ProgressBarStatus.Value = index
+        ControlsUtils.UpdateUI()
+    End Sub
+
+
+    Private Sub SIPBuild_totalitems(sender As Object, total As Integer)
+        ProgressBarStatus.Visibility = Visibility.Visible
+        ProgressBarStatus.Maximum = total
+    End Sub
 
 End Class

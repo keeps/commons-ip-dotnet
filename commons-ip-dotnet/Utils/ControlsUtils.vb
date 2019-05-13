@@ -13,8 +13,15 @@ Public Class ControlsUtils
         If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
             Dim filesPaths() As String = e.Data.GetData("FileDrop", False)
             For Each path As String In filesPaths
-                log.Info("Load file: " & path)
-                result.Add(New DataRowFile(path))
+                Dim pathAttrs = System.IO.File.GetAttributes(path)
+                If pathAttrs.HasFlag(FileAttributes.Directory) Then
+                    Dim folder As New DirectoryInfo(path)
+                    For Each file In folder.GetFiles
+                        result.Add(New DataRowFile(file.FullName, True, file.Directory.Name))
+                    Next
+                Else
+                    result.Add(New DataRowFile(path))
+                End If
             Next
         End If
 
@@ -40,12 +47,10 @@ Public Class ControlsUtils
                     result.Add(item)
                 End If
             Next
-
         End If
 
         Return result
     End Function
-
 
     ''' <summary>
     ''' Force refresh

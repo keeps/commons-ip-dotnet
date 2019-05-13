@@ -15,29 +15,45 @@ Public Class SIPModel
         End Set
     End Property
 
+    ''' <summary>
+    ''' Return the path
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property Filename As String
         Get
             Return FileInfo.Name
         End Get
     End Property
 
+    ''' <summary>
+    ''' Return the full directory path 
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property FullDirectoryName As String
         Get
             Return FileInfo.Directory.ToString
         End Get
     End Property
 
+    ''' <summary>
+    ''' Return the filename without extension
+    ''' Replace the extension by empty string to calculate the filename without extension
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property FilenameWithoutExtension As String
         Get
-            Return FileInfo.Name.Substring(0, FileInfo.Name.LastIndexOf("."))
+            Return FileInfo.Name.Replace(FileInfo.Extension, String.Empty)
         End Get
     End Property
 
+    ''' <summary>
+    ''' Return the file extension
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property FileExtension As String
         Get
             Return FileInfo.Extension
         End Get
     End Property
-
 
 End Class

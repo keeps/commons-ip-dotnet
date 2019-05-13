@@ -47,4 +47,10 @@ Public Class DataRowFile
         Me.IsSelected = isSelected
     End Sub
 
+    Public Sub New(ByVal path As String, ByVal isSelected As Boolean, ByVal representatioName As String)
+        Me.New(path)
+        Me.IsSelected = isSelected
+        Me.RepresentationName = representatioName
+    End Sub
+
 End Class
