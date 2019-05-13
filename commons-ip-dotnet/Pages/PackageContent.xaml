@@ -22,8 +22,7 @@
             <DataGrid Name="PackageContentDataGrid" AllowDrop="True" Drop="DescriptiveMetadataFiles_Drop" Grid.Row="1" Background="White" Margin="10,30,10,10">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Remove" Click="MenuItemRemove_Click"/>
-                        <MenuItem Header="Representation name" Click="MenuItemChangeRepresentationName_Click"/>
+                        <MenuItem Header="Set representation name" Click="MenuItemChangeRepresentationName_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 <DataGrid.Columns>

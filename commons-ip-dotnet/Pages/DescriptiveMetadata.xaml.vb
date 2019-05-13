@@ -71,7 +71,7 @@ Class DescriptiveMetadata
 
     Public Overrides Sub CheckIfPageIsValid()
         If MetadataTypeCombobox IsNot Nothing AndAlso DescriptionMetadataDataGrid IsNot Nothing Then
-            If MetadataTypeCombobox.SelectedIndex >= 0 AndAlso DescriptionMetadataDataGrid.Items.Count > 0 Then
+            If MetadataTypeCombobox.SelectedIndex >= 0 AndAlso DescriptionMetadataDataGrid.Items.Count > 0 AndAlso ControlsUtils.RetrieveFiles(DescriptionMetadataDataGrid, True).Count > 0 Then
                 IsValidPage = True
             Else
                 IsValidPage = False

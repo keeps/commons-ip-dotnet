@@ -90,7 +90,7 @@ Class PackageContent
 
     Public Overrides Sub CheckIfPageIsValid()
         If RepresentationContentTypeCombobox IsNot Nothing AndAlso PackageContentDataGrid IsNot Nothing Then
-            If RepresentationContentTypeCombobox.SelectedIndex >= 0 AndAlso PackageContentDataGrid.Items.Count > 0 Then
+            If RepresentationContentTypeCombobox.SelectedIndex >= 0 AndAlso PackageContentDataGrid.Items.Count > 0 AndAlso ControlsUtils.RetrieveFiles(Me.PackageContentDataGrid, True).Count > 0 Then
                 IsValidPage = True
             Else
                 IsValidPage = False
