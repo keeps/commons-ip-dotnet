@@ -348,5 +348,4 @@ healthchecksdb
 MigrationBackup/
 
 # Ignore all content inside target folder except commons-ip-X.X.X.dll
-
 **ikvm**
