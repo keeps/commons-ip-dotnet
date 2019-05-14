@@ -32,7 +32,7 @@ Public Class HeaderControl
     End Sub
 
     Private Shared Sub DescriptionHeaderChangedHandler(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
-        CType(d, HeaderControl).LabelDescriptionHeader.Content = e.NewValue.ToString
+        CType(d, HeaderControl).LabelDescriptionHeader.Text = e.NewValue.ToString
     End Sub
 
     Public Sub New()
@@ -41,7 +41,7 @@ Public Class HeaderControl
 
         ' Add any initialization after the InitializeComponent() call.
         LabelTitleHeader.Content = TitleHeader
-        LabelDescriptionHeader.Content = DescriptionHeader
+        LabelDescriptionHeader.Text = DescriptionHeader
 
     End Sub
 

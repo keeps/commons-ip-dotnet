@@ -220,14 +220,15 @@ Class MainWindow
     End Sub
 
     Private Sub SIPBuild_CurrentStatus(sender As Object, index As Integer)
-        ProgressBarStatus.Value = index
         ControlsUtils.UpdateUI()
+        ProgressBarStatus.Value = index
     End Sub
 
 
     Private Sub SIPBuild_totalitems(sender As Object, total As Integer)
         ProgressBarStatus.Visibility = Visibility.Visible
         ProgressBarStatus.Maximum = total
+        ControlsUtils.UpdateUI()
     End Sub
 
 End Class

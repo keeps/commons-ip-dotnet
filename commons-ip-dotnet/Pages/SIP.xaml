@@ -20,8 +20,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <local:HeaderControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TitleHeader="SIP creation" DescriptionHeader="Choose the path to save the SIP package" />
-        <Button Content="Location.." Grid.Row="2" Grid.Column="1" Click="SaveSIP_Click" Margin="25,5,25,0" Height="42" VerticalAlignment="Top"/>
+        <local:HeaderControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TitleHeader="SIP creation" DescriptionHeader="Choose the path and the file name to save the package, after that please press next and wait" />
+        <Button Content="Location..." Grid.Row="2" Grid.Column="1" Click="SaveSIP_Click" Margin="25,5,25,0" Height="42" VerticalAlignment="Top"/>
         <Label Name="LabelLocationPath" Grid.Column="0" Margin="0,50,0,0" Grid.Row="2" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" VerticalAlignment="Top"/>
     </Grid>
 </local:ExtendedPage>

@@ -8,11 +8,11 @@
              d:DesignHeight="90" d:DesignWidth="700">
     <Grid MinHeight="90" MaxHeight="90">
         <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="H1 HEADER" Name="LabelTitleHeader" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="0" Grid.Row="0" FontSize="20" FontWeight="Bold"/>
-        <Label Content="H4 DESCRIPTION" Name="LabelDescriptionHeader" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Column="0" Grid.Row="1"/>
+        <TextBlock Text="H4 DESCRIPTION" Margin="20,0,20,0" TextWrapping="Wrap" Name="LabelDescriptionHeader"  TextAlignment="Center" Grid.Column="0" Grid.Row="1"/>
         <Grid Grid.Row="2"/>
     </Grid>
 </UserControl>

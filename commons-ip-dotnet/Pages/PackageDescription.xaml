@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <local:HeaderControl Height="90" VerticalAlignment="Top" TitleHeader="Information package" DescriptionHeader="In this page please fill some base information about the package" Grid.Row="0" Grid.Column="0"/>
+        <local:HeaderControl Height="90" VerticalAlignment="Top" TitleHeader="Information package" DescriptionHeader="Fill correctly the next fields to create a package with basic information" Grid.Row="0" Grid.Column="0"/>
         <Grid Grid.Row="1" Margin="0,30,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="45px"/>
@@ -39,7 +39,7 @@
             <TextBox Name="CreatorRoleTextBox" Height="24" Margin="10,11,10,0" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="TextBox_TextChanged"  />
             <ComboBox 
                 Name="CreatorTypeCombobox" 
-                materialDesign:HintAssist.Hint="Please, select the creator type"
+                materialDesign:HintAssist.Hint="Select the creator type"
                 Margin="10,11,10,0" 
                 Grid.Column="1" 
                 Grid.Row="4" 

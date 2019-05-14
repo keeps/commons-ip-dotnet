@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommonsIP4Net"
-        xmlns:resx="clr-namespace:CommonsIP4Net.Resources"
         mc:Ignorable="d"
-        Title="SIP creation" Height="700" Width="580">
+        Title="SIP creation" Height="702" Width="547">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -29,7 +28,7 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <ProgressBar Name="ProgressBarStatus"  Height="4" Margin="14,35,200,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <ProgressBar Name="ProgressBarStatus" Margin="14,35,200,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
     </Grid>
 
 
