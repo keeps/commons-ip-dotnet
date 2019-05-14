@@ -61,17 +61,19 @@ Public Class SIPBuild
     ''' Use all data to build the SIP file
     ''' </summary>
     Public Sub Build()
-
+        log.Debug("Buid sip start")
         ' 1) instantiate E-ARK SIP object
         Dim sip = New EARKSIP(PackageDescriptionModel.SIPID, IPContentType.getMIXED)
         sip.addObserver(Me)
 
+        log.Debug("Set description to sip: " & PackageDescriptionModel.SIPDescription)
         ' 1.1) set optional human-readable description
         sip.setDescription(PackageDescriptionModel.SIPDescription)
 
 
         ' 1.2) add descriptive metadata (SIP level)
         For Each file In DescriptiveMetadataModel.DescriptiveMetadataFile
+            log.Debug("Add descriptive metadata files: " & file.FullName)
             Dim metadataDescriptiveDC = New IPDescriptiveMetadata(
             New IPFile(Paths.get(file.FullName)),
             New MetadataType(DescriptiveMetadataModel.DescriptiveMetadataType), Nothing)
@@ -79,17 +81,20 @@ Public Class SIPBuild
         Next
 
         For Each file In OtherMetadataModel.OtherMetadataFiles
+            log.Debug("Add other metadata files: " & file.FullName)
             Dim metadataOtherFile = New IPFile(Paths.get(file.FullName))
             ' 1.4.1) optionally one may rename file final name
             Dim metadataOther = New IPMetadata(metadataOtherFile)
             sip.addOtherMetadata(metadataOther)
         Next
 
+        log.Debug("Add agent information")
         Dim agent = New IPAgent(PackageDescriptionModel.CreatorName, PackageDescriptionModel.CreatorType.ToString, "", CreatorType.valueOf(PackageDescriptionModel.CreatorType.ToString()), "")
 
         For Each keyValue In PackageContentModel.RetrieveFilesByRepresentationName
             Dim representation = New IPRepresentation(keyValue.Key)
             For Each file In keyValue.Value
+                log.Debug("Add file: " & file.FullName & " to representation: " & keyValue.Key)
                 representation.addFile(New IPFile(Paths.get(file.FullName)))
             Next
             sip.addRepresentation(representation)
@@ -107,32 +112,32 @@ Public Class SIPBuild
     End Sub
 
     Public Sub sipBuildRepresentationsProcessingStarted(i As Integer) Implements SIPObserver.sipBuildRepresentationsProcessingStarted
-        log.Debug("Build status: sipBuildRepresentationsProcessingStarted" & i)
+        log.Debug("Build status: sipBuildRepresentationsProcessingStarted " & i)
     End Sub
 
     Public Sub sipBuildRepresentationProcessingStarted(i As Integer) Implements SIPObserver.sipBuildRepresentationProcessingStarted
-        log.Debug("Build status: sipBuildRepresentationProcessingStarted" & i)
+        log.Debug("Build status: sipBuildRepresentationProcessingStarted " & i)
     End Sub
 
     Public Sub sipBuildRepresentationProcessingCurrentStatus(i As Integer) Implements SIPObserver.sipBuildRepresentationProcessingCurrentStatus
-        log.Debug("Build status: sipBuildRepresentationProcessingCurrentStatus" & i)
+        log.Debug("Build status: sipBuildRepresentationProcessingCurrentStatus " & i)
     End Sub
 
     Public Sub sipBuildRepresentationProcessingEnded() Implements SIPObserver.sipBuildRepresentationProcessingEnded
-        log.Debug("Build status: sipBuildRepresentationProcessingEnded")
+        log.Debug("Build status: sipBuildRepresentationProcessingEnded ")
     End Sub
 
     Public Sub sipBuildRepresentationsProcessingEnded() Implements SIPObserver.sipBuildRepresentationsProcessingEnded
-        log.Debug("Build status: sipBuildRepresentationsProcessingEnded")
+        log.Debug("Build status: sipBuildRepresentationsProcessingEnded ")
     End Sub
 
     Public Sub sipBuildPackagingStarted(i As Integer) Implements SIPObserver.sipBuildPackagingStarted
-        log.Debug("Build status: sipBuildPackagingStarted" & i)
+        log.Debug("Build status: sipBuildPackagingStarted " & i)
         RaiseEvent TotalItems(Me, i)
     End Sub
 
     Public Sub sipBuildPackagingCurrentStatus(i As Integer) Implements SIPObserver.sipBuildPackagingCurrentStatus
-        log.Debug("Build status: sipBuildPackagingCurrentStatus" & i)
+        log.Debug("Build status: sipBuildPackagingCurrentStatus " & i)
         RaiseEvent CurrentStatus(Me, i)
     End Sub
 

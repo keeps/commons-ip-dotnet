@@ -25,8 +25,14 @@
         End Try
     End Sub
 
+    ''' <summary>
+    ''' When press Enter the popup closed and return the current representation name
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub RepresentationNameTextBox_KeyDown(sender As Object, e As KeyEventArgs)
-        If e.Key = Key.Return Then
+        'Only close if SaveButton is enable
+        If e.Key = Key.Return AndAlso SaveButton.IsEnabled Then
             RepresentationName = RepresentationNameTextBox.Text
             Me.Close()
         End If

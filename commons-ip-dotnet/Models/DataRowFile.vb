@@ -27,19 +27,22 @@ Public Class DataRowFile
         End Get
         Set(value As String)
             myRepresentationName = value
+            'Used to update UI when propertie change
             RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs("RepresentationName"))
         End Set
     End Property
 
     Public Property File As FileInfo
 
-
+    ''' <summary>
+    ''' Create a object from full path name
+    ''' </summary>
+    ''' <param name="path"></param>
     Public Sub New(ByVal path As String)
         Me.File = New FileInfo(path)
         Me.RepresentationName = "Representation"
         Me.IsSelected = True
     End Sub
-
 
     Public Sub New(ByVal path As String, ByVal isSelected As Boolean)
         Me.New(path)

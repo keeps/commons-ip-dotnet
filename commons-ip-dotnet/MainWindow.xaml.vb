@@ -8,9 +8,13 @@ Imports org.roda_project.commons_ip.utils.METSEnums
 Class MainWindow
     Private ReadOnly log As ILog = LogManager.GetLogger(GetType(MainWindow))
 
+    'Used to know if the next button restart the aplicacion or continue to the next page
     Private Property RestartWorkflow As Boolean
 
     Private myPages As List(Of ExtendedPage) = Nothing
+    ''' <summary>
+    ''' All the pages present in the workflow
+    ''' </summary>
     Private ReadOnly Property Pages As List(Of ExtendedPage)
         Get
             If myPages Is Nothing Then
@@ -30,6 +34,7 @@ Class MainWindow
             Return myCurrentPageIndex
         End Get
         Set(value As Integer)
+            log.Debug("Current page index change, value: " & value)
             myCurrentPageIndex = value
         End Set
     End Property
@@ -90,6 +95,7 @@ Class MainWindow
         ' Add any initialization after the InitializeComponent() call.
         InitializePagesAndCreateCurrentOrder()
 
+        'Navigate to the first page, when aplication start
         Me.MainFrame.NavigationService.Navigate(Pages(CurrentPageIntex))
 
     End Sub
@@ -98,6 +104,7 @@ Class MainWindow
     ''' Initialize pages
     ''' </summary>
     Private Sub InitializePagesAndCreateCurrentOrder()
+        'Reset all the variables
         myPages = Nothing
         RestartWorkflow = False
         HelpLabel.Content = String.Empty
@@ -113,6 +120,7 @@ Class MainWindow
         Me.packageContentPage = New PackageContent
         Me.sipPage = New SIP()
 
+        'Add the validPage event to enable/disabel next button
         AddHandler presentationPage.ValidPageChanged, AddressOf ExtendedPage_ValidPageChanged
         AddHandler packageDescriptionPage.ValidPageChanged, AddressOf ExtendedPage_ValidPageChanged
         AddHandler descriptiveMetadataPage.ValidPageChanged, AddressOf ExtendedPage_ValidPageChanged
@@ -129,6 +137,11 @@ Class MainWindow
         Pages.Add(sipPage)
     End Sub
 
+    ''' <summary>
+    ''' Change IsEnable propertie of next button
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="isValid"></param>
     Private Sub ExtendedPage_ValidPageChanged(sender As Object, isValid As Boolean)
         If isValid Then
             ButtonNext.IsEnabled = True
@@ -149,20 +162,20 @@ Class MainWindow
         End If
 
         If CurrentPageIntex = TotalPages - 1 Then
-                log.Debug("Last PAGE!!!! Create a SIP file")
-                CrateSIP()
+            log.Debug("Last PAGE!!!! Create a SIP file")
+            CrateSIP()
+        Else
+            If CurrentPageIntex < TotalPages - 1 Then
+                log.Debug("Change page to the next one")
+                CurrentPageIntex += 1
+                Me.MainFrame.NavigationService.Navigate(Pages(CurrentPageIntex))
+                Me.ButtonPrevious.IsEnabled = True
             Else
-                If CurrentPageIntex < TotalPages - 1 Then
-                    log.Debug("Change page to the next one")
-                    CurrentPageIntex += 1
-                    Me.MainFrame.NavigationService.Navigate(Pages(CurrentPageIntex))
-                    Me.ButtonPrevious.IsEnabled = True
-                Else
-                    log.Debug("No more pages available")
-                End If
+                log.Debug("No more pages available")
             End If
+        End If
 
-            UpdateInfoFromSelectedPage()
+        UpdateInfoFromSelectedPage()
     End Sub
 
     ''' <summary>
@@ -182,11 +195,12 @@ Class MainWindow
         UpdateInfoFromSelectedPage()
     End Sub
 
-
+    ''' <summary>
+    ''' Check if page is valid after page index change
+    ''' </summary>
     Private Sub UpdateInfoFromSelectedPage()
         Dim page As ExtendedPage = Pages(CurrentPageIntex)
         page.CheckIfPageIsValid()
-        'Me.HelpLabel.Content = page.PageDescription
     End Sub
 
     ''' <summary>
@@ -208,6 +222,11 @@ Class MainWindow
         sipBuild.Build()
     End Sub
 
+    ''' <summary>
+    ''' Event fired when SIP build end, receive exit status (SUCCESS OR FAIL)
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="sip"></param>
     Private Sub SIPBuild_Ended(sender As Object, sip As SIPBuildExitStatus)
         If sip = SIPBuildExitStatus.SUCCESS Then
             HelpLabel.Content = "SIP created with success :)"
@@ -219,12 +238,21 @@ Class MainWindow
         ButtonNext.IsEnabled = True
     End Sub
 
+    ''' <summary>
+    ''' Receive the current process status
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="index"></param>
     Private Sub SIPBuild_CurrentStatus(sender As Object, index As Integer)
         ControlsUtils.UpdateUI()
         ProgressBarStatus.Value = index
     End Sub
 
-
+    ''' <summary>
+    ''' Event fired when process files start, receive the total of files to process
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="total"></param>
     Private Sub SIPBuild_totalitems(sender As Object, total As Integer)
         ProgressBarStatus.Visibility = Visibility.Visible
         ProgressBarStatus.Maximum = total
