@@ -1,5 +1,5 @@
 # commons-ip-dotnet
-Provides an API to manipulate Information Packages
+Provides an API to manipulate Information Packages in .net framework project.
 
 ### Requirements
 
@@ -10,7 +10,7 @@ Provides an API to manipulate Information Packages
 
 ## Commons-IP (Java)
 
-The base of this project is the implementation of [E-ARK IP manipulation java library](https://github.com/keeps/commons-ip). The current application use some strategies to use a wrapper of that project in order to use him in a .net project.
+The base of this project is the implementation of [E-ARK IP manipulation java library](https://github.com/keeps/commons-ip). The current application use somes strategies to use a wrapper of that project in order to use apply it a .net project.
 
 ## IKVM
 "IKVM.NET includes the following components: A Java Virtual Machine implemented in .NET. A .NET implementation of the Java class libraries. A tool that translates Java bytecode (JAR files) to .NET IL (DLLs or EXE files)." For more information see [http://www.ikvm.net/](http://www.ikvm.net/)
@@ -174,3 +174,10 @@ The next table show the values for 3 tests in every implementation, the java imp
 | 1      | 758 | 3994 | 1629
 | 2      | 815 | 4015 | 1601
 | 3      | 870 | 3884 | 1617
+
+
+## Creadits
+ * Paulo Lima (KEEP SOLUTIONS)
+
+## License
+?????

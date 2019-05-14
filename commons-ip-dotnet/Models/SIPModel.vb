@@ -16,7 +16,7 @@ Public Class SIPModel
     End Property
 
     ''' <summary>
-    ''' Return the path
+    ''' Return only the filename with extension
     ''' </summary>
     ''' <returns></returns>
     Public ReadOnly Property Filename As String
