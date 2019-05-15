@@ -336,9 +336,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Images\keeps_logo_black_en_vector.svg">
+    <Resource Include="Resources\Images\icons8-cardboard-box-64.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

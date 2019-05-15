@@ -4,5 +4,7 @@
 
     <BitmapImage x:Key="EARK4ALL_LOGO" UriSource="pack://siteoforigin:,,,/Resources/Images/cropped-e-ark4all-logo.jpg"/>
     <BitmapImage x:Key="KEEP_LOGO" UriSource="pack://siteoforigin:,,,/Resources/Images/keeps_logo_black_en_large.png"/>
+    <BitmapImage x:Key="APP_LOGO" UriSource="pack://siteoforigin:,,,/Resources/Images/icons8-cardboard-box-64.png"/>
+
 
 </ResourceDictionary>

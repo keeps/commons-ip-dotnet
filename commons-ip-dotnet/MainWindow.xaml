@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommonsIP4Net"
         mc:Ignorable="d"
-        Title="SIP creation" Height="702" Width="547">
+        Title="E-ARK SIP .NET" Height="702" Width="547" Icon="Resources/Images/icons8-cardboard-box-64.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
