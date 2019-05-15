@@ -210,7 +210,7 @@ Class MainWindow
     Private Sub CrateSIP()
         ButtonPrevious.IsEnabled = False
         ButtonNext.IsEnabled = False
-        HelpLabel.Content = "Wainting, create SIP file..."
+        HelpLabel.Content = "Wait, creating SIP file..."
 
         ControlsUtils.UpdateUI()
         Dim sipBuild As New SIPBuild(Me.PackageDescriptionModel, Me.DescriptiveMetadataModel, Me.OtherMetadataModel, Me.PackageContentModel, Me.SIPModel)
@@ -231,7 +231,7 @@ Class MainWindow
         If sip = SIPBuildExitStatus.SUCCESS Then
             HelpLabel.Content = "SIP created with success :)"
         Else
-            HelpLabel.Content = "Problem to create SIP file, check if all files have correct permissions :("
+            HelpLabel.Content = "Problem to create SIP file, check if all files has correct permissions :("
         End If
         RestartWorkflow = True
         ButtonNext.Content = "Restart"

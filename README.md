@@ -71,7 +71,7 @@ Add one or more descritive metadata files. The application **doesn't apply any v
 
 #### Other metadata
 
-The current page is optional. This page is used to add other metadata files, like information about how files were created and stored, intellectual property rights,etc.
+The current page is optional. This page is used to add other metadata files, like information about how files were created and stored, intellectual property rights, etc.
 
 #### Package content
 
@@ -176,7 +176,7 @@ The next table shows the values for 3 tests in every implementation. The java im
 | 3      | 870 | 3884 | 1617
 
 
-## Creadits
+## Credits
  * Paulo Lima (KEEP SOLUTIONS)
 
 ## License
