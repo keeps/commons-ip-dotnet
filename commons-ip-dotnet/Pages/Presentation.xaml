@@ -25,8 +25,6 @@
         <local:HeaderControl Grid.Row="0" Grid.ColumnSpan="3" TitleHeader="Partners" DescriptionHeader="All project members"/>
         
         <Image Margin="10,20,10,20" Grid.Column="1" Grid.Row="2" Source="{StaticResource EARK4ALL_LOGO}"/>
-        <Image Margin="10,20,10,20" Grid.Column="1" Grid.Row="3" Source="{StaticResource KEEP_LOGO}"/>
-        <!--<Image Grid.Column="1" Grid.Row="4" Source="{StaticResource EARK4ALL_LOGO}"/>
-        <Image Grid.Column="1" Grid.Row="5" Source="{StaticResource EARK4ALL_LOGO}"/>-->
+        <Image Margin="10,20,10,20" Grid.Column="1" Grid.Row="3" Source="{StaticResource keeps_logo_black_en_vectorDrawingImage}"/>
     </Grid>
 </local:ExtendedPage>
