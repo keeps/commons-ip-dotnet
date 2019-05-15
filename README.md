@@ -10,21 +10,21 @@ Provides an API to manipulate Information Packages in .net framework project.
 
 ## Commons-IP (Java)
 
-The base of this project is the implementation of [E-ARK IP manipulation java library](https://github.com/keeps/commons-ip). The current application use somes strategies to use a wrapper of that project in order to use apply it a .net project.
+The base of this project is the implementation of [E-ARK IP manipulation java library](https://github.com/keeps/commons-ip). The current application uses somes strategies to use a wrapper of that project in order to use apply it a .net project.
 
 ## IKVM
 "IKVM.NET includes the following components: A Java Virtual Machine implemented in .NET. A .NET implementation of the Java class libraries. A tool that translates Java bytecode (JAR files) to .NET IL (DLLs or EXE files)." For more information see [http://www.ikvm.net/](http://www.ikvm.net/)
 
 ### Usage
-IKVM have a large number of aplications and functionalities, in this project the propose is create a dll file from a jar library. With dll file we can import into a .Net project and use without any complication or major setup.
+IKVM has a large number of aplications and functionalities. In this project, the propose is to create a dll file from a jar library that is possible to import into a .Net project and use it without any complication or major setup.
 
-Download the correct version of IKVM, the IKVM version need to be the same as JDK. The current base project use JDK 1.8, for that, we need to download IKVM 8 from [http://www.frijters.net/ikvmbin-8.1.5717.0.zip](http://www.frijters.net/ikvmbin-8.1.5717.0.zip)
+Download the correct version of IKVM. The IKVM version needs to be the same as JDK. The current base project uses JDK 1.8, so the download needs to be IKVM 8 from [http://www.frijters.net/ikvmbin-8.1.5717.0.zip](http://www.frijters.net/ikvmbin-8.1.5717.0.zip)
 
 ```bash
 ikvmc.exe #to view help command
 ``` 
 
-In the previous version of java (< 8), we don't need (-recurse) parameter. Only need a jar with all dependencies inside, for java 8 we need a jar library and a folder with all 3rd party jar files.
+In the previous version of java (< 8), (-recurse) parameter is not needed because only is needed a jar with all dependencies inside. In case of java 8 a jar library and a folder with all 3rd party jar files are used.
 
 ```bash
 ikvmc.exe -target:library (PATH-JAR-FILE) -recurse:(FOLDER-PATH-WITH-JAR-DEPENDENCIES) -out:(OUTPUT-DLL-FILENAME)
@@ -36,18 +36,18 @@ ikvmc.exe -target:library (PATH-JAR-FILE) -recurse:(FOLDER-PATH-WITH-JAR-DEPENDE
 
 To see all commons-ip jar dependencies please see the [pom.xml](https://github.com/keeps/commons-ip/blob/master/pom.xml) file and find all dependencies/versions.
 
-**Note:** Don't worry about the **warnings** when execute the previous command, check only if an error are occurred.
+**Note:** Don't worry about the **warnings** when the previous command is executed, check only if an error occurred.
 
 <!--
 The file run.ps1 (Powershell script) download, extract (IKVM 8) and create the commons-ip.dll into target folder. That dll file is used into commons-ip-dotnet project to create a SIP.zip file from a .net Windows application.-->
 
 ## Commons-ip-dotnet
 
-The project include de commons-ip-X.X.X.dll, the file is present inside target folder and referenced into project, the .net package manager [Nuget](https://www.nuget.org/) download all necessaries references to compile the project.
+The project includes the commons-ip-X.X.X.dll. The file is present inside the target folder and referenced into the project. The .net package manager [Nuget](https://www.nuget.org/) download all necessary references to compile the project.
 
 ### Description
 
-The current application use the commons-ip-X.X.X.dll to create a EARKSIP package, and the .net aplication only create a UI (user interface) to help the user to manipulate information. 
+The current application uses the commons-ip-X.X.X.dll to create a EARKSIP package, and the .net aplication only create a UI (user interface) to help the user to manipulate information. 
 
 The application works like a wizard with 5 steps:
  * Presentation;
@@ -59,33 +59,33 @@ The application works like a wizard with 5 steps:
 
 #### Presentation
 
-Only indicates the partners off project and some base information about the stakeholders.
+Only indicates the partners of the project and some base information about the stakeholders.
 
 #### Package information
 
-Start the EARKSIP file configuration, the information like SIP identifier or the creator name can be set in this page.
+Start the EARKSIP file configuration. The information like SIP identifier or the creator name can be set in this page.
 
 #### Descriptive metadata
 
-Add one or more descritive metadata files, the application **doesn't apply any validation** about the files. Only add the files and set the selected descritive metadata type, present in the top page. This options contains all the types present in the original commns-ip implementation (ex. EAD,EAC-CPF.etc).
+Add one or more descritive metadata files. The application **doesn't apply any validation** about the files, only add the files and set the selected descritive metadata type, present in the top page. This option contains all the types present in the original commns-ip implementation (ex. EAD,EAC-CPF.etc).
 
 #### Other metadata
 
-The current page is optional, this page is used to add other metadata files like information about how file were created and stored, intellectual property rights,etc.
+The current page is optional. This page is used to add other metadata files, like information about how files were created and stored, intellectual property rights,etc.
 
 #### Package content
 
-Add all files or folders into one or more representations. The aplication only load files or files inside a folder. If we drop folders inside folders the content are ignored. The default representation name is "Representation". If the content to add is a folder the representation has the same name. The representation name can be changed in the application by two ways. 
+Add all files or folders into one or more representations. The aplication only load files or files inside a folder. If folders are dropped inside folders, the content is ignored. The default representation name is "Representation". If the content to add is a folder, the representation has the same name. The representation name can be changed in the application in two ways. 
 1. Edit the cell value;
-2. Select multiple rows and click with right button of the mouse and select "Set representation name", this options allows to set the same name to multiple items.
+2. Select multiple rows and click with right button of the mouse and select "Set representation name". This option allows to set the same name to multiple items.
 
 #### SIP build
 
-At this page please select the destination path to save the EARKSIP file and specify the name of package. The output file is a ZIP, when process start the application will show a progress bar and some information about the process, please wait until the finish and start again if you want.
+At this page please select the destination path to save the EARKSIP file and specify the name of the package. The output file is a ZIP and when the process starts the application will show a progress bar and some information about the process. Please wait until the finish and start again if you want.
 
 ### Performance
 
-The biggest problem of this approach is the performance, to measure this value we test in the same machine the implementation in java and the wrapper in .net project. The test create a SIP file with the following instructions in java and visual basic. 
+The biggest problem of this approach is the performance. The performance was measured in time testing in the same machine the implementation in java and the wrapper in .net project. The test create a SIP file with the following instructions in java and visual basic. 
 
 
 ``` vb
@@ -166,7 +166,7 @@ representation2.addFile(representationFile3)
 Dim zipSIP = sip.build(Paths.get(""))
 ```
 
-The next table show the values for 3 tests in every implementation, the java implementation is obviously more quickly around 800 milliseconds. The .net test follow 2 approaches, the first one create the EARKSIP and load all IKVM dll at the same time, the second create the EARKSIP but all IKVM dll already loaded in memory.
+The next table shows the values for 3 tests in every implementation. The java implementation is obviously more quickly around 800 milliseconds. The .net test follow 2 approaches, the first one creates the EARKSIP and load all IKVM dll at the same time and the second creates the EARKSIP but all IKVM dll are already loaded in the memory.
 
 
 | Test number        | Java (ms)          | .net (ms)  | .net 2 (ms)
