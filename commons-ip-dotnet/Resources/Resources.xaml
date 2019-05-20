@@ -8,6 +8,13 @@
     <!--<BitmapImage x:Key="FOLDER_ICON" UriSource="pack://siteoforigin:,,,/Resources/Images/icons8-folder-48.png"/>
     <BitmapImage x:Key="FILE_ICON" UriSource="pack://siteoforigin:,,,/Resources/Images/icons8-binary-file-48.png"/>-->
 
+    <Style x:Key="Triggers" TargetType="RichTextBox">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="BorderBrush" Value="{x:Null}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 
 </ResourceDictionary>

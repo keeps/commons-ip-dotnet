@@ -5,6 +5,28 @@ Class SIP
 
     Public Property SipModel As SIPModel
 
+    Public Property ProgressBarTotalItems As Integer
+        Get
+            Return If(ProgressBarStatus IsNot Nothing, ProgressBarStatus.Maximum, 0)
+        End Get
+        Set(value As Integer)
+            If ProgressBarStatus IsNot Nothing Then
+                ProgressBarStatus.Maximum = value
+            End If
+        End Set
+    End Property
+
+    Public Property ProgressBarCurrentStatus As Integer
+        Get
+            Return If(ProgressBarStatus IsNot Nothing, ProgressBarStatus.Value, 0)
+        End Get
+        Set(value As Integer)
+            If ProgressBarStatus IsNot Nothing Then
+                ProgressBarStatus.Value = value
+            End If
+        End Set
+    End Property
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -12,28 +34,6 @@ Class SIP
 
         ' Add any initialization after the InitializeComponent() call.
         SipModel = New SIPModel()
-    End Sub
-
-    ''' <summary>
-    ''' Open the windows dialog to choose the location and name of ZIP file
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub SaveSIP_Click(sender As Object, e As RoutedEventArgs)
-
-        Dim dlg = New Microsoft.Win32.SaveFileDialog
-        dlg.Filter = "Zip files (*.zip)|*.zip"
-
-        Dim result = dlg.ShowDialog()
-
-        If result = True Then
-            Dim filename As String = dlg.FileName
-            Me.LabelLocationPath.Content = filename
-            Me.SipModel.FullPath = filename
-        End If
-
-        CheckIfPageIsValid()
-
     End Sub
 
     Public Overrides Sub CheckIfPageIsValid()
@@ -44,7 +44,23 @@ Class SIP
         End If
     End Sub
 
-    Protected Overrides Sub UpdateModelObject()
+    Private Sub Image_MouseLeftButtonUp(sender As Object, e As MouseButtonEventArgs)
+        Dim dlg = New Microsoft.Win32.SaveFileDialog
+        dlg.Filter = "Zip files (*.zip)|*.zip"
+        dlg.FileName = "SIP_1"
+
+        Dim result = dlg.ShowDialog()
+
+        If result = True Then
+            Dim filename As String = dlg.FileName
+            Me.InputTextSaveAs.TextBox.Text = filename
+            Me.SipModel.FullPath = filename
+        End If
+
+        CheckIfPageIsValid()
     End Sub
 
+    Protected Overrides Sub UpdateModelObject()
+        Throw New NotImplementedException()
+    End Sub
 End Class

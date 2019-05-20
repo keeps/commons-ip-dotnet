@@ -9,7 +9,7 @@
       d:DesignHeight="469.726" d:DesignWidth="756.849"
       Title="DescriptiveMetadata">
     <DockPanel >
-        <local:HeaderControl DockPanel.Dock="Top" VerticalAlignment="Top" TitleHeader="Select descriptive metadata file" DescriptionHeader="Drop the descriptive metadata file in the grid below, and select the respective descriptive metadata file type.vbnewline You can only select one metadata file per package .vbnewline There is no validation performed regarding the selected file and type." Height="112" Margin="10,0"   />
+        <local:HeaderControl DockPanel.Dock="Top" VerticalAlignment="Top" TitleHeader="Select descriptive metadata file" DescriptionHeader="Drop the descriptive metadata file in the grid below, and select the respective descriptive metadata file type.&#x0a;You can only select one metadata file per package (only the first dragged file will be selected).&#x0a;There is no validation performed regarding the selected file and type." Height="130" Margin="10,0"   />
         <local:InputCombobox x:Name="InputComboboxMetadatType" DockPanel.Dock="Top" Label="Descriptive metadata type" Height="60" Margin="10,0"/>
         <local:InputDataGrid x:Name="InputDataGridSelectedFiles" DockPanel.Dock="Top" Label="Selected files" Margin="10,0"/>
 

@@ -14,7 +14,7 @@
 
         <local:InputText x:Name="InputTextPackageIdentification" TextBoxText="SIP_1"  Height="60" Label="Package identification" Margin="10,0" />
         <local:InputText x:Name="InputTextPackageDescription" TextBoxText="Full E-ARK SIP" Height="60" Label="Package description" Margin="10,0"/>
-        <local:InputText x:Name="InputTextCreatorName" TextBoxText="KEEP SOLUTIONS" Height="60" Label="Creator name" Margin="10,0"/>
+        <local:InputText x:Name="InputTextCreatorName" TextBoxText="" Height="60" Label="Creator name" Margin="10,0"/>
         <local:InputText x:Name="InputTextCreatorRole" Height="60" Label="Creator role" Margin="10,0"/>
         <local:InputCombobox x:Name="InputComboboxCreatorType" Height="60" Label="Creator type" Margin="10,0"/>
         <StackPanel Height="100"/>

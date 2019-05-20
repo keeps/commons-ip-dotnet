@@ -7,9 +7,13 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SIP">
-    <DockPanel>
-        <local:HeaderControl DockPanel.Dock="Top" TitleHeader="Select destination file and create package" DescriptionHeader="Select the destination file were the new E-ARK SIP will be saved by clicking the Location button.vbnewline Click the Finish button to create the new package file. " Margin="10,0" Height="113"  />
-        <Button Content="Location..."  DockPanel.Dock="Top" Click="SaveSIP_Click" VerticalAlignment="Top" Margin="246,0,247,0"/>
-        <Label Name="LabelLocationPath"  DockPanel.Dock="Top" Margin="0,50,0,0"  HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
-    </DockPanel>
+    <Grid  >
+        <local:HeaderControl Grid.Column="0" Grid.Row="0" TitleHeader="Select destination file and create package" DescriptionHeader="Select the destination file were the new E-ARK SIP will be saved by clicking the Location button.vbnewline Click the Finish button to create the new package file. " Margin="10,10,10,0" VerticalAlignment="Top" Height="121" />
+        <local:InputText Grid.Column="0" Grid.Row="0" x:Name="InputTextSaveAs" IsEnabled="False" Height="60" Label="Save as" Margin="10,136,48,0" VerticalAlignment="Top"  />
+        <Image Grid.Column="0" Grid.Row="0" MouseLeftButtonUp="Image_MouseLeftButtonUp" DockPanel.Dock="Left" Source="pack://siteoforigin:,,,/Resources/Images/icons8-save-as-100.png" Margin="0,158,20,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Right" Width="28"/>
+        <Label Grid.Column="0" Grid.Row="0" Padding="0,5,0,0" Content="Current status: " Margin="20,196,20,0" Height="26" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="ProgressBarStatus" Margin="20,227,20,0" Height="9" VerticalAlignment="Top"/>
+
+
+    </Grid>
 </local:ExtendedPage>

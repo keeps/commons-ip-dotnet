@@ -59,8 +59,7 @@ Class OtherMetadata
     Private Sub DescriptiveMetadataFiles_Drop(sender As Object, e As DragEventArgs)
         Dim files = ControlsUtils.RetrieveDropFiles(e)
         If files.Count > 0 Then
-            ControlsUtils.AddGridItemFromPath(InputDataGridSelectedFiles.DataGrid, files)
-            'DescriptiveMetadataLabel.Visibility = Visibility.Hidden
+            ControlsUtils.AddGridItemFromPath(InputDataGridSelectedFiles.DataGrid, files, False, False)
         End If
         UpdateModelObject()
     End Sub

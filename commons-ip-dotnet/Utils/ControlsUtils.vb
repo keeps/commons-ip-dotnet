@@ -12,11 +12,13 @@ Public Class ControlsUtils
 
     Public Shared Function AddTemplateCheckbox(ByVal datagrid As DataGrid, ByVal header As String, ByVal binding As String) As FrameworkElementFactory
         Dim voidColumn As DataGridTemplateColumn = New DataGridTemplateColumn()
+        voidColumn.IsReadOnly = True
         voidColumn.Header = header
         Dim bind As Binding = New Binding(binding)
         bind.Mode = BindingMode.TwoWay
         Dim voidFactory As FrameworkElementFactory = New FrameworkElementFactory(GetType(CheckBox))
         voidFactory.SetValue(CheckBox.IsCheckedProperty, bind)
+        voidFactory.SetValue(CheckBox.HorizontalAlignmentProperty, HorizontalAlignment.Center)
         Dim voidTemplate As DataTemplate = New DataTemplate()
         voidTemplate.VisualTree = voidFactory
         voidColumn.CellTemplate = voidTemplate
@@ -25,8 +27,8 @@ Public Class ControlsUtils
     End Function
 
     Public Shared Function RetrieveTreeViewPath(ByVal originPath As String, ByVal path As String, ByVal treeViewChildren As List(Of TreeViewPath)) As List(Of TreeViewPath)
-        Dim IsInvalidFolder As Boolean = True
-        Dim IsInvalidFile As Boolean = True
+        Dim IsInvalidFolder As Boolean = False
+        Dim IsInvalidFile As Boolean = False
 
         If treeViewChildren Is Nothing Then
             treeViewChildren = New List(Of TreeViewPath)
@@ -96,9 +98,14 @@ Public Class ControlsUtils
         Return result
     End Function
 
-    Public Shared Sub AddGridItemFromPath(ByVal grid As DataGrid, ByVal files As List(Of DataRowFile))
+    Public Shared Sub AddGridItemFromPath(ByVal grid As DataGrid, ByVal files As List(Of DataRowFile), ByVal resetGrid As Boolean, ByVal onlyFirst As Boolean)
+        If resetGrid AndAlso grid IsNot Nothing AndAlso grid.Items IsNot Nothing Then
+            grid.Items.Clear()
+        End If
+
         For Each file In files
             grid.Items.Add(file)
+            If onlyFirst Then Exit For
         Next
     End Sub
 

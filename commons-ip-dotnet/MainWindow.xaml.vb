@@ -167,6 +167,9 @@ Class MainWindow
         Else
             If CurrentPageIntex < TotalPages - 1 Then
                 log.Debug("Change page to the next one")
+                If CurrentPageIntex = TotalPages - 2 Then
+                    Me.ButtonNext.Content = "Create SIP"
+                End If
                 CurrentPageIntex += 1
                 Me.MainFrame.NavigationService.Navigate(Pages(CurrentPageIntex))
                 Me.ButtonPrevious.IsEnabled = True
@@ -184,6 +187,14 @@ Class MainWindow
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub Previous_Click(sender As Object, e As RoutedEventArgs)
+        If RestartWorkflow Then
+            RestartWorkflow = False
+            ButtonNext.Content = "Next"
+            sipPage = New SIP()
+            AddHandler sipPage.ValidPageChanged, AddressOf ExtendedPage_ValidPageChanged
+            Pages(CurrentPageIntex) = sipPage
+        End If
+
         If CurrentPageIntex > 0 Then
             log.Debug("Change page to the previous one")
             CurrentPageIntex -= 1
@@ -220,6 +231,8 @@ Class MainWindow
         AddHandler sipBuild.SIPBuildEnd, AddressOf SIPBuild_Ended
 
         sipBuild.Build()
+        ButtonPrevious.IsEnabled = True
+
     End Sub
 
     ''' <summary>
@@ -244,8 +257,8 @@ Class MainWindow
     ''' <param name="sender"></param>
     ''' <param name="index"></param>
     Private Sub SIPBuild_CurrentStatus(sender As Object, index As Integer)
+        sipPage.ProgressBarCurrentStatus = index
         ControlsUtils.UpdateUI()
-        '  ProgressBarStatus.Value = index
     End Sub
 
     ''' <summary>
@@ -254,8 +267,7 @@ Class MainWindow
     ''' <param name="sender"></param>
     ''' <param name="total"></param>
     Private Sub SIPBuild_totalitems(sender As Object, total As Integer)
-        ' ProgressBarStatus.Visibility = Visibility.Visible
-        'ProgressBarStatus.Maximum = total
+        sipPage.ProgressBarTotalItems = total
         ControlsUtils.UpdateUI()
     End Sub
 

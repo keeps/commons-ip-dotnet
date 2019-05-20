@@ -73,8 +73,8 @@ Class DescriptiveMetadata
     Private Sub DescriptiveMetadataFiles_Drop(sender As Object, e As DragEventArgs)
         Dim files = ControlsUtils.RetrieveDropFiles(e)
         If files.Count > 0 Then
-            ControlsUtils.AddGridItemFromPath(InputDataGridSelectedFiles.DataGrid, files)
-            'DescriptiveMetadataLabel.Visibility = Visibility.Hidden
+
+            ControlsUtils.AddGridItemFromPath(InputDataGridSelectedFiles.DataGrid, files, True, True)
         End If
         UpdateModelObject()
     End Sub
@@ -104,7 +104,7 @@ Class DescriptiveMetadata
 
     Public Overrides Sub CheckIfPageIsValid()
         If InputComboboxMetadatType.Combobox IsNot Nothing AndAlso InputDataGridSelectedFiles.DataGrid IsNot Nothing Then
-            If InputComboboxMetadatType.Combobox.SelectedIndex >= 0 AndAlso InputDataGridSelectedFiles.DataGrid.Items.Count > 0 AndAlso ControlsUtils.RetrieveFiles(InputDataGridSelectedFiles.DataGrid, True).Count > 0 Then
+            If InputComboboxMetadatType.Combobox.SelectedIndex >= 0 AndAlso InputDataGridSelectedFiles.DataGrid.Items.Count > 0 AndAlso ControlsUtils.RetrieveFiles(InputDataGridSelectedFiles.DataGrid, True).Count = 1 Then
                 IsValidPage = True
             Else
                 IsValidPage = False
