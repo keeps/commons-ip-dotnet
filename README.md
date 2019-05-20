@@ -50,7 +50,9 @@ The application allows you to create E-ARK SIP files from your own files. In ord
  * **(Optional) select other metadata files:**  select other metadata files to add to the package (eg. information about how files were created and stored, intellectual property rights).
  * **Select package representation content:** add all the package files and/or folders into one representation. You can drop files, or folders containing files (folders with sub-folders will be discarded). You can also rename the representation name (default value is "Representation"). 
  * **Select destination file and create package:** create the EARK-SIP file by choosing where the file will be saved.
-<!-- After modifying this form, the selection control will be of a tree view. In this case, replace the following description:
+
+<!--
+After modifying this form, the selection control will be of a tree view. In this case, replace the following description:
 * **Select package representation content:** select the root folder to add to the package representation. All the files or sub-folders will be included in the representation.
 -->
 The project source code is available in the root *commons-ip-dotnet* folder.
