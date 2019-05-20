@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="FooterControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CommonsIP4Net"
+             mc:Ignorable="d" 
+             d:DesignHeight="114.82" d:DesignWidth="839.433">
+    <Grid>
+
+        <Button Click="Previous_Click" Name="ButtonPrevious" Content="Previous" Margin="0,10,105,0" VerticalAlignment="Top" HorizontalAlignment="Right" IsEnabled="False" Width="90"/>
+        <Button Click="Next_Click" Name="ButtonNext" Content="Next" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" IsEnabled="False"/>
+        <Image HorizontalAlignment="Left" Height="54" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource EARK4ALL_LOGO}"/>
+        <Image HorizontalAlignment="Left" Height="54" Margin="127,10,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource keeps_logo_black_en_vectorDrawingImage}"/>
+
+    </Grid>
+
+
+</UserControl>

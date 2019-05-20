@@ -1,0 +1,26 @@
+﻿<local:ExtendedPage x:Class="PackageDescription"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:CommonsIP4Net"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PackageDescription">
+   
+    <StackPanel >
+        <local:HeaderControl VerticalAlignment="Top" TitleHeader="Set package description" DescriptionHeader="Use following form to set the package basic information (identification description, creator info)" Grid.Row="0" Grid.Column="0" Margin="10,0" />
+
+        <local:InputText x:Name="InputTextPackageIdentification" TextBoxText="SIP_1"  Height="60" Label="Package identification" Margin="10,0" />
+        <local:InputText x:Name="InputTextPackageDescription" TextBoxText="Full E-ARK SIP" Height="60" Label="Package description" Margin="10,0"/>
+        <local:InputText x:Name="InputTextCreatorName" TextBoxText="" Height="60" Label="Creator name" Margin="10,0"/>
+        <local:InputText x:Name="InputTextCreatorRole" Height="60" Label="Creator role" Margin="10,0"/>
+        <local:InputCombobox x:Name="InputComboboxCreatorType" Height="60" Label="Creator type" Margin="10,0"/>
+        <StackPanel Height="100"/>
+    </StackPanel>
+
+
+
+
+</local:ExtendedPage>

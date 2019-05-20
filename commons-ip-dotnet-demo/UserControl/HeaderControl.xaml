@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="HeaderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CommonsIP4Net"
+             mc:Ignorable="d" d:DesignWidth="700" Height="104">
+
+    <DockPanel Margin="0,20,0,20" LastChildFill="True">
+        <!--<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>-->
+        <Label Content="H1 HEADER" DockPanel.Dock="Top" Padding="10,0,10,0"  Name="LabelTitleHeader" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="28" FontWeight="Bold"/>
+        <TextBlock Padding="10,0,10,0" DockPanel.Dock="Top" Text="H4 DESCRIPTION" TextWrapping="Wrap" Name="LabelDescriptionHeader"  TextAlignment="Left" />
+        <!--</Grid>-->
+    </DockPanel>
+</UserControl>
