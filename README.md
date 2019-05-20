@@ -23,7 +23,7 @@ To run the application you must comply with the following environment requiremen
 
 Download `commons-ip-dotnet-demo.zip` from [latest release](https://github.com/keeps/commons-ip-dotnet/releases/latest). Right-click and select Extract here. Open folder and execute file `commons-ip-dotnet-demo.exe`.
 
-![Demo main window](https://github.com/keeps/commons-ip-dotnet/tree/master/docs/images/01-application-info.png)
+![Demo main window](docs/images/01-application-info.png)
 
 The application allows you to create E-ARK SIP files from your own files. In order to create these packages, you'll have to perform the following tasks (as presented in the application): 
  * **Set package description:** set the package basic information (eg. identification, description, creator info).
