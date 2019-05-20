@@ -4,15 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CommonsIP4Net"
-             mc:Ignorable="d" 
-             d:DesignHeight="90" d:DesignWidth="700">
-    <Grid MinHeight="90" MaxHeight="90">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
-        <Label Content="H1 HEADER" Name="LabelTitleHeader" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="0" Grid.Row="0" FontSize="20" FontWeight="Bold"/>
-        <TextBlock Text="H4 DESCRIPTION" Margin="20,0,20,0" TextWrapping="Wrap" Name="LabelDescriptionHeader"  TextAlignment="Center" Grid.Column="0" Grid.Row="1"/>
-        <Grid Grid.Row="2"/>
-    </Grid>
+             mc:Ignorable="d" d:DesignWidth="700" Height="104">
+
+    <DockPanel Margin="0,20,0,20" LastChildFill="True">
+        <!--<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>-->
+        <Label Content="H1 HEADER" DockPanel.Dock="Top" Padding="10,0,10,0"  Name="LabelTitleHeader" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="28" FontWeight="Bold"/>
+        <TextBlock Padding="10,0,10,0" DockPanel.Dock="Top" Text="H4 DESCRIPTION" TextWrapping="Wrap" Name="LabelDescriptionHeader"  TextAlignment="Left" />
+        <!--</Grid>-->
+    </DockPanel>
 </UserControl>

@@ -175,6 +175,7 @@
     <Compile Include="Models\PackageDescriptionModel.vb" />
     <Compile Include="Models\SIPBuild.vb" />
     <Compile Include="Models\SIPModel.vb" />
+    <Compile Include="Models\TreeViewPath.vb" />
     <Compile Include="Pages\PackageContent.xaml.vb">
       <DependentUpon>PackageContent.xaml</DependentUpon>
     </Compile>
@@ -197,11 +198,30 @@
     <Compile Include="PopupTextBox.xaml.vb">
       <DependentUpon>PopupTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\FooterControl.xaml.vb">
+      <DependentUpon>FooterControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\HeaderControl.xaml.vb">
       <DependentUpon>HeaderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\InputAbstract.xaml.vb">
+      <DependentUpon>InputAbstract.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\InputTreeView.xaml.vb">
+      <DependentUpon>InputTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\InputDataGrid.xaml.vb">
+      <DependentUpon>InputDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\InputCombobox.xaml.vb">
+      <DependentUpon>InputCombobox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\InputText.xaml.vb">
+      <DependentUpon>InputText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ControlsUtils.vb" />
     <Compile Include="Utils\EnumsUtils.vb" />
+    <Compile Include="Utils\IKVMUtils.vb" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -254,9 +274,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Images\E-ARK4ALL.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Images\EU_LOGO.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
     <Page Include="Resources\Images\KEEP_LOGO.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="Resources\Resources.xaml">
       <SubType>Designer</SubType>
@@ -266,7 +296,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControl\FooterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControl\HeaderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\InputAbstract.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\InputTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControl\InputDataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControl\InputCombobox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControl\InputText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -336,9 +390,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\icons8-cardboard-box-64.png">
+    <None Include="Resources\Images\icons8-cardboard-box-64.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\icons8-binary-file-48.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\icons8-folder-48.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

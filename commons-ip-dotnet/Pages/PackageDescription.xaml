@@ -8,47 +8,19 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PackageDescription">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="90"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+   
+    <StackPanel >
+        <local:HeaderControl VerticalAlignment="Top" TitleHeader="Set package description" DescriptionHeader="Use following form to set the package basic information (identification description, creator info)" Grid.Row="0" Grid.Column="0" Margin="10,0" />
 
-        <local:HeaderControl Height="90" VerticalAlignment="Top" TitleHeader="Information package" DescriptionHeader="Fill correctly the next fields to create a package with basic information" Grid.Row="0" Grid.Column="0"/>
-        <Grid Grid.Row="1" Margin="0,30,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="45px"/>
-                <RowDefinition Height="45px"/>
-                <RowDefinition Height="45px"/>
-                <RowDefinition Height="45px"/>
-                <RowDefinition Height="45px"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Package identification"  Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" Height="45" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <Label Content="Package description" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Height="45" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <Label Content="Creator name" Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Height="45" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <Label Content="Creator role" Grid.Column="0" Grid.Row="3" VerticalAlignment="Top" Height="45" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <Label Content="Creator type" Grid.Column="0" Grid.Row="4" VerticalAlignment="Top" Height="45" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox Name="PackageIDTextBox" Height="24" Margin="10,11,10,0" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" Text="SIP_1" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" />
-            <TextBox Name="PackageDescriptionTextBox" Height="24" Margin="10,11,10,0" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="A full E-ARK SIP" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" />
-            <TextBox Name="CreatorNameTextBox" Height="24" Margin="10,11,10,0" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Text="KEEP SOLUTIONS" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" />
-            <TextBox Name="CreatorRoleTextBox" Height="24" Margin="10,11,10,0" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="TextBox_TextChanged"  />
-            <ComboBox 
-                Name="CreatorTypeCombobox" 
-                materialDesign:HintAssist.Hint="Select the creator type"
-                Margin="10,11,10,0" 
-                Grid.Column="1" 
-                Grid.Row="4" 
-                VerticalAlignment="Top" 
-                SelectionChanged="CreatorTypeCombobox_SelectionChanged"/>
-
-        </Grid>
+        <local:InputText x:Name="InputTextPackageIdentification" TextBoxText="SIP_1"  Height="60" Label="Package identification" Margin="10,0" />
+        <local:InputText x:Name="InputTextPackageDescription" TextBoxText="Full E-ARK SIP" Height="60" Label="Package description" Margin="10,0"/>
+        <local:InputText x:Name="InputTextCreatorName" TextBoxText="KEEP SOLUTIONS" Height="60" Label="Creator name" Margin="10,0"/>
+        <local:InputText x:Name="InputTextCreatorRole" Height="60" Label="Creator role" Margin="10,0"/>
+        <local:InputCombobox x:Name="InputComboboxCreatorType" Height="60" Label="Creator type" Margin="10,0"/>
+        <StackPanel Height="100"/>
+    </StackPanel>
 
 
 
-    </Grid>
+
 </local:ExtendedPage>

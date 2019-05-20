@@ -7,16 +7,45 @@ Class OtherMetadata
     Private ReadOnly log As ILog = LogManager.GetLogger(GetType(OtherMetadata))
 
 
-    Public OtherMetadataModel As OtherMetadataModel
+    Private myOtherMetadataModel As OtherMetadataModel
+    Public Property OtherMetadataModel As OtherMetadataModel
+        Get
+            If myOtherMetadataModel Is Nothing Then
+                myOtherMetadataModel = New OtherMetadataModel
+            End If
+            Return myOtherMetadataModel
+        End Get
+        Set(value As OtherMetadataModel)
+            myOtherMetadataModel = value
+        End Set
+    End Property
 
     Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
-
-        OtherMetadataModel = New OtherMetadataModel
+        BindEvents
+        AddColumnsDataGrid()
 
         ' Add any initialization after the InitializeComponent() call.
+    End Sub
+
+    Private Sub BindEvents()
+        AddHandler InputDataGridSelectedFiles.Drop, AddressOf DescriptiveMetadataFiles_Drop
+    End Sub
+
+    Private Sub AddColumnsDataGrid()
+        'Allow drop
+        InputDataGridSelectedFiles.DataGrid.AllowDrop = True
+        'Add custom columns
+        Dim selectedColumn As FrameworkElementFactory = ControlsUtils.AddTemplateCheckbox(InputDataGridSelectedFiles.DataGrid, "Selected", "IsSelected")
+        selectedColumn.AddHandler(CheckBox.CheckedEvent, New RoutedEventHandler(AddressOf CheckBox_CheckChanged))
+        selectedColumn.AddHandler(CheckBox.UncheckedEvent, New RoutedEventHandler(AddressOf CheckBox_CheckChanged))
+        Dim fileName As New DataGridTextColumn()
+        fileName.Header = "Filename"
+        fileName.Binding = New Binding("FullName")
+        fileName.IsReadOnly = True
+        InputDataGridSelectedFiles.DataGrid.Columns.Add(fileName)
     End Sub
 
 
@@ -30,8 +59,8 @@ Class OtherMetadata
     Private Sub DescriptiveMetadataFiles_Drop(sender As Object, e As DragEventArgs)
         Dim files = ControlsUtils.RetrieveDropFiles(e)
         If files.Count > 0 Then
-            ControlsUtils.AddGridItemFromPath(OtherMetadataDataGrid, files)
-            DescriptiveMetadataLabel.Visibility = Visibility.Hidden
+            ControlsUtils.AddGridItemFromPath(InputDataGridSelectedFiles.DataGrid, files)
+            'DescriptiveMetadataLabel.Visibility = Visibility.Hidden
         End If
         UpdateModelObject()
     End Sub
@@ -71,8 +100,8 @@ Class OtherMetadata
     ''' </summary>
     Protected Overrides Sub UpdateModelObject()
 
-        If OtherMetadataModel IsNot Nothing AndAlso OtherMetadataDataGrid IsNot Nothing Then
-            Me.OtherMetadataModel.OtherMetadataFiles = ControlsUtils.RetrieveFiles(OtherMetadataDataGrid)
+        If OtherMetadataModel IsNot Nothing AndAlso InputDataGridSelectedFiles.DataGrid IsNot Nothing Then
+            Me.OtherMetadataModel.OtherMetadataFiles = ControlsUtils.RetrieveFiles(InputDataGridSelectedFiles.DataGrid)
             CheckIfPageIsValid()
         End If
 

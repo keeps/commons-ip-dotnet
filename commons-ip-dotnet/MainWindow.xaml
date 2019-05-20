@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommonsIP4Net"
         mc:Ignorable="d"
-        Title="E-ARK SIP .NET" Height="702" Width="547" Icon="Resources/Images/icons8-cardboard-box-64.png">
+        Title="E-ARK SIP .NET" Height="600" Width="800" Icon="pack://siteoforigin:,,,/Resources/Images/icons8-cardboard-box-64.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -16,19 +16,12 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Frame Name="MainFrame" Source="/CommonsIP4Net;component/Pages/Metadata.xaml" Grid.Row="0" Grid.ColumnSpan="2" AutomationProperties.Name="MainFrame" NavigationUIVisibility="Hidden"/>
-        <Button Click="Previous_Click" Name="ButtonPrevious" Content="Previous" Grid.Column="1" Margin="0,10,105,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" IsEnabled="False" Width="90"/>
-        <Button Click="Next_Click" Name="ButtonNext" Content="Next" Grid.Column="1" Margin="0,10,10,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" IsEnabled="False"/>
-        <Label Name="HelpLabel" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="10,10,202,0" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Arial" Height="20" VerticalAlignment="Top" Background="White" FontSize="10" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.006"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <ProgressBar Name="ProgressBarStatus" Margin="14,35,200,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Button Click="Previous_Click" Name="ButtonPrevious" Content="Previous" Grid.Column="1" Margin="0,15,115,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" IsEnabled="False" Width="90"/>
+        <Button Click="Next_Click" Name="ButtonNext" Content="Next" Grid.Column="1" Margin="0,15,20,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" IsEnabled="False"/>
+        <Image Margin="20,0,0,10" Grid.Row="1" Source="{StaticResource keeps_logo_black_en_vectorDrawingImage}" HorizontalAlignment="Left" Width="77" Height="30" VerticalAlignment="Bottom"/>
+        <Image HorizontalAlignment="Left" Margin="102,0,0,10" Grid.Row="1" Width="60" Source="{StaticResource image2vectorDrawingImage}" Height="30" VerticalAlignment="Bottom"/>
+        <Image HorizontalAlignment="Left" Margin="167,0,0,10" Grid.Row="1" Width="139" Source="{StaticResource Logo_beta_v5DrawingImage}" Height="30" VerticalAlignment="Bottom"/>
+
     </Grid>
 
 

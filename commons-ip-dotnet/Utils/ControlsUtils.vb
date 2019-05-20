@@ -7,6 +7,74 @@ Imports log4net
 Public Class ControlsUtils
     Private Shared ReadOnly log As ILog = LogManager.GetLogger(GetType(ControlsUtils))
 
+    Public Const FOLDER_FILENAME As String = "pack://siteoforigin:,,,/Resources/Images/icons8-folder-48.png"
+    Public Const FILE_FILENAME As String = "pack://siteoforigin:,,,/Resources/Images/icons8-binary-file-48.png"
+
+    Public Shared Function AddTemplateCheckbox(ByVal datagrid As DataGrid, ByVal header As String, ByVal binding As String) As FrameworkElementFactory
+        Dim voidColumn As DataGridTemplateColumn = New DataGridTemplateColumn()
+        voidColumn.Header = header
+        Dim bind As Binding = New Binding(binding)
+        bind.Mode = BindingMode.TwoWay
+        Dim voidFactory As FrameworkElementFactory = New FrameworkElementFactory(GetType(CheckBox))
+        voidFactory.SetValue(CheckBox.IsCheckedProperty, bind)
+        Dim voidTemplate As DataTemplate = New DataTemplate()
+        voidTemplate.VisualTree = voidFactory
+        voidColumn.CellTemplate = voidTemplate
+        datagrid.Columns.Add(voidColumn)
+        Return voidFactory
+    End Function
+
+    Public Shared Function RetrieveTreeViewPath(ByVal originPath As String, ByVal path As String, ByVal treeViewChildren As List(Of TreeViewPath)) As List(Of TreeViewPath)
+        Dim IsInvalidFolder As Boolean = True
+        Dim IsInvalidFile As Boolean = True
+
+        If treeViewChildren Is Nothing Then
+            treeViewChildren = New List(Of TreeViewPath)
+        End If
+
+        'Folders
+        Try
+            Dim directories = IO.Directory.GetDirectories(path)
+            For Each item In directories
+                log.Debug("Directory: " & item)
+                Dim directoryItem As New DirectoryInfo(item)
+                Dim p As New TreeViewPath(originPath, directoryItem.Name, directoryItem.FullName, True)
+                treeViewChildren.Add(p)
+                RetrieveTreeViewPath(originPath, item, p.Children)
+            Next
+        Catch ex As Exception
+            IsInvalidFolder = True
+            log.Warn("Invalid directory path: " & path)
+        End Try
+
+        'Files inside folder
+        Try
+            Dim files = IO.Directory.GetFiles(path)
+            For Each item In files
+                Dim file As New FileInfo(item)
+                Dim p As New TreeViewPath(originPath, file.Name, file.FullName, False)
+                treeViewChildren.Add(p)
+                log.Debug("File: " & item)
+            Next
+        Catch ex As Exception
+            IsInvalidFile = True
+            log.Warn("Invalid path: " & path)
+        End Try
+
+        'Only files
+        If IsInvalidFile AndAlso IsInvalidFolder Then
+            Try
+                Dim file As New FileInfo(path)
+                Dim p As New TreeViewPath(originPath, file.Name, file.FullName, False)
+                treeViewChildren.Add(p)
+            Catch ex As Exception
+                log.Warn("Invalid path: " & path)
+            End Try
+        End If
+
+        Return treeViewChildren
+    End Function
+
     Public Shared Function RetrieveDropFiles(e As DragEventArgs) As List(Of DataRowFile)
         Dim result As New List(Of DataRowFile)
 

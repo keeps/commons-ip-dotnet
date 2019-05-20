@@ -107,9 +107,9 @@ Class MainWindow
         'Reset all the variables
         myPages = Nothing
         RestartWorkflow = False
-        HelpLabel.Content = String.Empty
-        ProgressBarStatus.Value = 0
-        ProgressBarStatus.Visibility = Visibility.Hidden
+        'HelpLabel.Content = String.Empty
+        'ProgressBarStatus.Value = 0
+        'ProgressBarStatus.Visibility = Visibility.Hidden
         ButtonNext.Content = "Next"
 
         'Create all pages
@@ -210,7 +210,7 @@ Class MainWindow
     Private Sub CrateSIP()
         ButtonPrevious.IsEnabled = False
         ButtonNext.IsEnabled = False
-        HelpLabel.Content = "Wait!! Creating E-ARK SIP file..."
+        'HelpLabel.Content = "Wait!! Creating E-ARK SIP file..."
 
         ControlsUtils.UpdateUI()
         Dim sipBuild As New SIPBuild(Me.PackageDescriptionModel, Me.DescriptiveMetadataModel, Me.OtherMetadataModel, Me.PackageContentModel, Me.SIPModel)
@@ -229,12 +229,12 @@ Class MainWindow
     ''' <param name="sip"></param>
     Private Sub SIPBuild_Ended(sender As Object, sip As SIPBuildExitStatus)
         If sip = SIPBuildExitStatus.SUCCESS Then
-            HelpLabel.Content = "E-ARK SIP created with success :)"
+            ' HelpLabel.Content = "E-ARK SIP created with success :)"
         Else
-            HelpLabel.Content = "Problem to create E-ARK SIP file, check if all files has correct permissions :("
+            'HelpLabel.Content = "Problem to create E-ARK SIP file, check if all files has correct permissions :("
         End If
         RestartWorkflow = True
-        ButtonNext.Content = "Restart"
+        ButtonNext.Content = "Create new SIP"
         ButtonNext.IsEnabled = True
     End Sub
 
@@ -245,7 +245,7 @@ Class MainWindow
     ''' <param name="index"></param>
     Private Sub SIPBuild_CurrentStatus(sender As Object, index As Integer)
         ControlsUtils.UpdateUI()
-        ProgressBarStatus.Value = index
+        '  ProgressBarStatus.Value = index
     End Sub
 
     ''' <summary>
@@ -254,8 +254,8 @@ Class MainWindow
     ''' <param name="sender"></param>
     ''' <param name="total"></param>
     Private Sub SIPBuild_totalitems(sender As Object, total As Integer)
-        ProgressBarStatus.Visibility = Visibility.Visible
-        ProgressBarStatus.Maximum = total
+        ' ProgressBarStatus.Visibility = Visibility.Visible
+        'ProgressBarStatus.Maximum = total
         ControlsUtils.UpdateUI()
     End Sub
 

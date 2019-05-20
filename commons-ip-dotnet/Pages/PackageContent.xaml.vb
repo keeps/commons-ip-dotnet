@@ -8,18 +8,63 @@ Class PackageContent
 
     Private ReadOnly log As ILog = LogManager.GetLogger(GetType(PackageContent))
 
-
-    Public PackageContentModel As PackageContentModel
+    Private myPackageContentModel As PackageContentModel
+    Public Property PackageContentModel As PackageContentModel
+        Get
+            If myPackageContentModel Is Nothing Then
+                myPackageContentModel = New PackageContentModel
+            End If
+            Return myPackageContentModel
+        End Get
+        Set(value As PackageContentModel)
+            myPackageContentModel = value
+        End Set
+    End Property
 
     Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
 
-        PackageContentModel = New PackageContentModel
+        BindEvents()
 
         ' Add any initialization after the InitializeComponent() call.
         LoadRepresentationContentType()
+
+    End Sub
+
+    Private Sub BindEvents()
+        InputTreeViewPaths.TreeView.AllowDrop = True
+
+        AddHandler InputComboboxType.Combobox.SelectionChanged, AddressOf MetadataTypeCombobox_SelectionChanged
+        AddHandler InputTextRepresentationName.TextBox.TextChanged, AddressOf InputTextRepresentationName_TextChanged
+        AddHandler InputTreeViewPaths.TreeView.DragOver, AddressOf InputTreeViewPaths_DragOver
+        AddHandler InputTreeViewPaths.TreeView.Drop, AddressOf InputTreeViewPaths_Drop
+    End Sub
+
+
+    Private Sub InputTreeViewPaths_Drop(sender As Object, e As DragEventArgs)
+        Dim filesPaths() As String = e.Data.GetData("FileDrop", False)
+        If filesPaths IsNot Nothing Then
+            Dim list As New List(Of TreeViewPath)
+            For Each filePath As String In filesPaths
+                list.AddRange(ControlsUtils.RetrieveTreeViewPath(filePath, filePath, Nothing))
+            Next
+            InputTreeViewPaths.TreeView.ItemsSource = list
+
+            UpdateModelObject()
+        End If
+    End Sub
+
+    Private Sub InputTreeViewPaths_DragOver(sender As Object, e As DragEventArgs)
+        If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
+            Dim filesPaths() As String = e.Data.GetData("FileDrop", False)
+            If filesPaths.Count > 1 Then
+                e.Effects = DragDropEffects.None
+            Else
+                e.Effects = DragDropEffects.Move
+            End If
+        End If
     End Sub
 
     ''' <summary>
@@ -28,23 +73,18 @@ Class PackageContent
     Private Sub LoadRepresentationContentType()
         Dim representationContentType = [Enum].GetValues(GetType(RepresentationContentTypeEnum.__Enum))
         For Each type As RepresentationContentTypeEnum.__Enum In representationContentType
-            RepresentationContentTypeCombobox.Items.Add(type.ToString())
+            InputComboboxType.Combobox.Items.Add(type.ToString())
         Next
     End Sub
 
 #Region "Events"
 
     ''' <summary>
-    ''' Event fired when files dropped over Label and datagrid
+    ''' 
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub DescriptiveMetadataFiles_Drop(sender As Object, e As DragEventArgs)
-        Dim files = ControlsUtils.RetrieveDropFiles(e)
-        If files.Count > 0 Then
-            ControlsUtils.AddGridItemFromPath(PackageContentDataGrid, files)
-            DescriptiveMetadataLabel.Visibility = Visibility.Hidden
-        End If
+    Private Sub InputTextRepresentationName_TextChanged(sender As Object, e As TextChangedEventArgs)
         UpdateModelObject()
     End Sub
 
@@ -69,28 +109,12 @@ Class PackageContent
         End If
     End Sub
 
-
-    Private Sub MenuItemRemove_Click(sender As Object, e As RoutedEventArgs)
-        Dim representation = New IPRepresentation("asd")
-    End Sub
-
-    Private Sub MenuItemChangeRepresentationName_Click(sender As Object, e As RoutedEventArgs)
-        Dim popupWindow As New PopupTextBox
-        popupWindow.ShowDialog()
-
-        If popupWindow IsNot Nothing AndAlso Not String.IsNullOrEmpty(popupWindow.RepresentationName) Then
-            For Each item In PackageContentDataGrid.SelectedItems
-                CType(item, DataRowFile).RepresentationName = popupWindow.RepresentationName
-            Next
-        End If
-
-    End Sub
-
 #End Region
 
     Public Overrides Sub CheckIfPageIsValid()
-        If RepresentationContentTypeCombobox IsNot Nothing AndAlso PackageContentDataGrid IsNot Nothing Then
-            If RepresentationContentTypeCombobox.SelectedIndex >= 0 AndAlso PackageContentDataGrid.Items.Count > 0 AndAlso ControlsUtils.RetrieveFiles(Me.PackageContentDataGrid, True).Count > 0 Then
+        If InputComboboxType.Combobox IsNot Nothing AndAlso InputTreeViewPaths.TreeView IsNot Nothing Then
+            Dim items = CType(InputTreeViewPaths.TreeView.ItemsSource, List(Of TreeViewPath))
+            If InputComboboxType.Combobox.SelectedIndex >= 0 AndAlso items.Count > 0 Then
                 IsValidPage = True
             Else
                 IsValidPage = False
@@ -103,9 +127,11 @@ Class PackageContent
     ''' </summary>
     Protected Overrides Sub UpdateModelObject()
 
-        If PackageContentModel IsNot Nothing AndAlso RepresentationContentTypeCombobox IsNot Nothing Then
-            Me.PackageContentModel.PackageContent = ControlsUtils.RetrieveFiles(Me.PackageContentDataGrid, True)
-            Me.PackageContentModel.RepresentationContentType = EnumsUtils.GetRepresentationContentType(RepresentationContentTypeCombobox.SelectedItem)
+        If PackageContentModel IsNot Nothing AndAlso InputComboboxType.Combobox IsNot Nothing AndAlso InputTreeViewPaths IsNot Nothing AndAlso InputTreeViewPaths.TreeView.ItemsSource IsNot Nothing Then
+            Dim paths = CType(InputTreeViewPaths.TreeView.ItemsSource, List(Of TreeViewPath))
+            Me.PackageContentModel.PackageContent = paths
+            Me.PackageContentModel.RepresentationContentType = EnumsUtils.GetRepresentationContentType(InputComboboxType.Combobox.SelectedItem)
+            Me.PackageContentModel.RepresentationName = InputTextRepresentationName.TextBox.Text
             CheckIfPageIsValid()
         End If
 

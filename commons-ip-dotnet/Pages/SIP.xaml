@@ -7,21 +7,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SIP">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="90"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <local:HeaderControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TitleHeader="SIP creation" DescriptionHeader="Choose the path and the file name to save the package, after that please press next and wait" />
-        <Button Content="Location..." Grid.Row="2" Grid.Column="1" Click="SaveSIP_Click" Margin="25,5,25,0" Height="42" VerticalAlignment="Top"/>
-        <Label Name="LabelLocationPath" Grid.Column="0" Margin="0,50,0,0" Grid.Row="2" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" VerticalAlignment="Top"/>
-    </Grid>
+    <DockPanel>
+        <local:HeaderControl DockPanel.Dock="Top" TitleHeader="Select destination file and create package" DescriptionHeader="Select the destination file were the new E-ARK SIP will be saved by clicking the Location button.vbnewline Click the Finish button to create the new package file. " Margin="10,0" Height="113"  />
+        <Button Content="Location..."  DockPanel.Dock="Top" Click="SaveSIP_Click" VerticalAlignment="Top" Margin="246,0,247,0"/>
+        <Label Name="LabelLocationPath"  DockPanel.Dock="Top" Margin="0,50,0,0"  HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
+    </DockPanel>
 </local:ExtendedPage>

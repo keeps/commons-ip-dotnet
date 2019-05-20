@@ -1,4 +1,5 @@
 ﻿Imports java.nio.file
+Imports java.util
 Imports log4net
 Imports org.roda_project.commons_ip.model
 Imports org.roda_project.commons_ip.model.impl.eark
@@ -100,14 +101,9 @@ Public Class SIPBuild
         log.Debug("Add agent information")
         Dim agent = New IPAgent(PackageDescriptionModel.CreatorName, PackageDescriptionModel.CreatorType.ToString, "", CreatorType.valueOf(PackageDescriptionModel.CreatorType.ToString()), "")
 
-        For Each keyValue In PackageContentModel.RetrieveFilesByRepresentationName
-            Dim representation = New IPRepresentation(keyValue.Key)
-            For Each file In keyValue.Value
-                log.Debug("Add file: " & file.FullName & " to representation: " & keyValue.Key)
-                representation.addFile(New IPFile(Paths.get(file.FullName)))
-            Next
-            sip.addRepresentation(representation)
-        Next
+        Dim representation1 = New IPRepresentation(PackageContentModel.RepresentationName)
+        sip.addRepresentation(representation1)
+        CreateRepresentationStructure(representation1, PackageContentModel.PackageContent)
 
         Try
             ' 2) build SIP, providing an output directory
@@ -119,6 +115,29 @@ Public Class SIPBuild
             RaiseEvent SIPBuildEnd(Me, SIPBuildExitStatus.FAIL)
         End Try
     End Sub
+
+    Private Function CreateRepresentationStructure(ByVal representation As IPRepresentation, ByVal v As List(Of TreeViewPath)) As IPRepresentation
+
+        For Each item In v
+            If item.IsDirectory Then
+                CreateRepresentationStructure(representation, item.Children)
+            End If
+        Next
+
+        For Each item In v
+            If Not item.IsDirectory Then
+                Dim representationFile = New IPFile(Paths.get(item.FullName))
+                Dim relativePath = IKVMUtils.ListToArrayList(item.RetrieveRelativePath())
+                representationFile.setRelativeFolders(relativePath)
+                representation.addFile(representationFile)
+            End If
+        Next
+
+        Return representation
+
+    End Function
+
+
 
     Public Sub sipBuildRepresentationsProcessingStarted(i As Integer) Implements SIPObserver.sipBuildRepresentationsProcessingStarted
         log.Debug("Build status: sipBuildRepresentationsProcessingStarted " & i)

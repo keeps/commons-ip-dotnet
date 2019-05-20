@@ -8,12 +8,18 @@
       mc:Ignorable="d" 
       d:DesignHeight="469.726" d:DesignWidth="756.849"
       Title="DescriptiveMetadata">
-    <Grid>
+    <DockPanel >
+        <local:HeaderControl DockPanel.Dock="Top" VerticalAlignment="Top" TitleHeader="Select descriptive metadata file" DescriptionHeader="Drop the descriptive metadata file in the grid below, and select the respective descriptive metadata file type.vbnewline You can only select one metadata file per package .vbnewline There is no validation performed regarding the selected file and type." Height="112" Margin="10,0"   />
+        <local:InputCombobox x:Name="InputComboboxMetadatType" DockPanel.Dock="Top" Label="Descriptive metadata type" Height="60" Margin="10,0"/>
+        <local:InputDataGrid x:Name="InputDataGridSelectedFiles" DockPanel.Dock="Top" Label="Selected files" Margin="10,0"/>
+
+    </DockPanel>
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <local:HeaderControl Height="90" VerticalAlignment="Top" TitleHeader="Descriptive metadata" DescriptionHeader="Add one or more descriptive metadata files and select the correct type" Grid.Row="0" Grid.Column="0"/>
+        <local:HeaderControl Height="90" VerticalAlignment="Top" TitleHeader="Select descriptive metadata file" DescriptionHeader="Drop the descriptive metadata file in the grid below, and select the respective descriptive metadata file type.vbnewline You can only select one metadata file per package .vbnewline There is no validation performed regarding the selected file and type." Grid.Row="0" Grid.Column="0"/>
         <Grid Margin="0,10,0,0" Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="55"/>
@@ -28,7 +34,9 @@
                 SelectionChanged="MetadataTypeCombobox_SelectionChanged" Height="30"/>
             <DataGrid Name="DescriptionMetadataDataGrid" AllowDrop="True" Drop="DescriptiveMetadataFiles_Drop" Grid.Row="1" Background="White" Margin="10,30,10,10">
                 <DataGrid.Columns>
-                    <!--<DataGridCheckBoxColumn Header="Selected" IsReadOnly="False" Width="2*" ></DataGridCheckBoxColumn>-->
+                    -->
+    <!--<DataGridCheckBoxColumn Header="Selected" IsReadOnly="False" Width="2*" ></DataGridCheckBoxColumn>-->
+    <!--
                     <DataGridTemplateColumn Header="Selected" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -41,9 +49,10 @@
             </DataGrid>
             <Label Content="Descriptive metadata type" Padding="0,0,0,0" HorizontalAlignment="Left" Grid.Row="0" Margin="10,4,0,0" VerticalAlignment="Top" Width="547" Height="21"/>
             <Label Content="Selected files" Padding="0,5,0,10"  HorizontalAlignment="Left" Margin="10,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="586"/>
-            <Label Name="DescriptiveMetadataLabel" AllowDrop="True" Drop="DescriptiveMetadataFiles_Drop" Content="Drop descriptive metadata files" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" FontSize="18" FontWeight="Bold" />
+            <Label Name="DescriptiveMetadataLabel" AllowDrop="True" Drop="DescriptiveMetadataFiles_Drop" Content="Drop descriptive metadata file here" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" FontSize="18" FontWeight="Bold" />
         </Grid>
 
 
-    </Grid>
+    </Grid>-->
+
 </local:ExtendedPage>

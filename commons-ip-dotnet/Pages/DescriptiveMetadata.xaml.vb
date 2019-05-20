@@ -6,15 +6,26 @@ Class DescriptiveMetadata
 
     Private ReadOnly log As ILog = LogManager.GetLogger(GetType(DescriptiveMetadata))
 
-
-    Public DescriptiveMetadataModel As DescriptiveMetadataModel
+    Private myDescriptiveMetadataModel As DescriptiveMetadataModel
+    Public Property DescriptiveMetadataModel As DescriptiveMetadataModel
+        Get
+            If myDescriptiveMetadataModel Is Nothing Then
+                myDescriptiveMetadataModel = New DescriptiveMetadataModel
+            End If
+            Return myDescriptiveMetadataModel
+        End Get
+        Set(value As DescriptiveMetadataModel)
+            myDescriptiveMetadataModel = value
+        End Set
+    End Property
 
     Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
 
-        DescriptiveMetadataModel = New DescriptiveMetadataModel
+        BindEvents()
+        AddColumnsDataGrid()
 
         ' Add any initialization after the InitializeComponent() call.
         LoadDescriptionMetadataType()
@@ -26,8 +37,30 @@ Class DescriptiveMetadata
     Private Sub LoadDescriptionMetadataType()
         Dim metadataTypes = [Enum].GetValues(GetType(MetadataTypeEnum.__Enum))
         For Each type As MetadataTypeEnum.__Enum In metadataTypes
-            MetadataTypeCombobox.Items.Add(type.ToString())
+            InputComboboxMetadatType.Combobox.Items.Add(type.ToString())
         Next
+    End Sub
+
+    ''' <summary>
+    ''' This method add custom columns to current grid
+    ''' </summary>
+    Private Sub AddColumnsDataGrid()
+        'Allow drop
+        InputDataGridSelectedFiles.DataGrid.AllowDrop = True
+        'Add custom columns
+        Dim selectedColumn As FrameworkElementFactory = ControlsUtils.AddTemplateCheckbox(InputDataGridSelectedFiles.DataGrid, "Selected", "IsSelected")
+        selectedColumn.AddHandler(CheckBox.CheckedEvent, New RoutedEventHandler(AddressOf CheckBox_CheckChanged))
+        selectedColumn.AddHandler(CheckBox.UncheckedEvent, New RoutedEventHandler(AddressOf CheckBox_CheckChanged))
+        Dim fileName As New DataGridTextColumn()
+        fileName.Header = "Filename"
+        fileName.Binding = New Binding("FullName")
+        fileName.IsReadOnly = True
+        InputDataGridSelectedFiles.DataGrid.Columns.Add(fileName)
+    End Sub
+
+    Private Sub BindEvents()
+        AddHandler InputComboboxMetadatType.Combobox.SelectionChanged, AddressOf MetadataTypeCombobox_SelectionChanged
+        AddHandler InputDataGridSelectedFiles.DataGrid.Drop, AddressOf DescriptiveMetadataFiles_Drop
     End Sub
 
 #Region "Events"
@@ -40,8 +73,8 @@ Class DescriptiveMetadata
     Private Sub DescriptiveMetadataFiles_Drop(sender As Object, e As DragEventArgs)
         Dim files = ControlsUtils.RetrieveDropFiles(e)
         If files.Count > 0 Then
-            ControlsUtils.AddGridItemFromPath(DescriptionMetadataDataGrid, files)
-            DescriptiveMetadataLabel.Visibility = Visibility.Hidden
+            ControlsUtils.AddGridItemFromPath(InputDataGridSelectedFiles.DataGrid, files)
+            'DescriptiveMetadataLabel.Visibility = Visibility.Hidden
         End If
         UpdateModelObject()
     End Sub
@@ -70,8 +103,8 @@ Class DescriptiveMetadata
 #End Region
 
     Public Overrides Sub CheckIfPageIsValid()
-        If MetadataTypeCombobox IsNot Nothing AndAlso DescriptionMetadataDataGrid IsNot Nothing Then
-            If MetadataTypeCombobox.SelectedIndex >= 0 AndAlso DescriptionMetadataDataGrid.Items.Count > 0 AndAlso ControlsUtils.RetrieveFiles(DescriptionMetadataDataGrid, True).Count > 0 Then
+        If InputComboboxMetadatType.Combobox IsNot Nothing AndAlso InputDataGridSelectedFiles.DataGrid IsNot Nothing Then
+            If InputComboboxMetadatType.Combobox.SelectedIndex >= 0 AndAlso InputDataGridSelectedFiles.DataGrid.Items.Count > 0 AndAlso ControlsUtils.RetrieveFiles(InputDataGridSelectedFiles.DataGrid, True).Count > 0 Then
                 IsValidPage = True
             Else
                 IsValidPage = False
@@ -84,9 +117,9 @@ Class DescriptiveMetadata
     ''' </summary>
     Protected Overrides Sub UpdateModelObject()
 
-        If DescriptiveMetadataModel IsNot Nothing AndAlso MetadataTypeCombobox IsNot Nothing Then
-            Me.DescriptiveMetadataModel.DescriptiveMetadataFile = ControlsUtils.RetrieveFiles(DescriptionMetadataDataGrid, True)
-            Me.DescriptiveMetadataModel.DescriptiveMetadataType = EnumsUtils.GetMetadataType(MetadataTypeCombobox.SelectedItem)
+        If DescriptiveMetadataModel IsNot Nothing AndAlso InputComboboxMetadatType.Combobox IsNot Nothing Then
+            Me.DescriptiveMetadataModel.DescriptiveMetadataFile = ControlsUtils.RetrieveFiles(InputDataGridSelectedFiles.DataGrid, True)
+            Me.DescriptiveMetadataModel.DescriptiveMetadataType = EnumsUtils.GetMetadataType(InputComboboxMetadatType.Combobox.SelectedItem)
             CheckIfPageIsValid()
         End If
 
