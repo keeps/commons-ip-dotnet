@@ -56,6 +56,7 @@ Download the package at [https://www.nuget.org/downloads](https://www.nuget.org/
     * Tools that enable Java and .NET interoperability
 
     For more information see [http://www.ikvm.net/](http://www.ikvm.net/).
+    
     IKVM is automatically installed by NuGet in the next step.
 
 
@@ -69,36 +70,47 @@ Create a full E-ARK SIP
 ' 1) instantiate E-ARK SIP object
 Dim sip = New EARKSIP("SIP_1", IPContentType.getMIXED())
 sip.addCreatorSoftwareAgent("My company name")
+
 ' 1.1) set optional human-readable description
 sip.setDescription("A full E-ARK SIP")
+
 ' 1.2) add descriptive metadata (SIP level)
 Dim metadataDescriptiveDC = New IPDescriptiveMetadata(
   New IPFile(Paths.get("test\resources\eark\metadata_descriptive_dc.xml")),
   New MetadataType(MetadataTypeEnum.DC), Nothing)
 sip.addDescriptiveMetadata(metadataDescriptiveDC)
+
 ' 1.3) add preservation metadata (SIP level)
 Dim metadataPreservation = New IPMetadata(
   New IPFile(Paths.get("test\resources\eark\metadata_preservation_premis.xml")))
 sip.addPreservationMetadata(metadataPreservation)
+
 ' 1.4) add other metadata (SIP level)
 Dim metadataOtherFile = New IPFile(Paths.get("test\resources\eark\metadata_other.txt"))
+
 ' 1.4.1) optionally one may rename file final name
 metadataOtherFile.setRenameTo("metadata_other_renamed.txt")
 Dim metadataOther = New IPMetadata(metadataOtherFile)
 sip.addOtherMetadata(metadataOther)
+
 ' 1.5) add xml schema (SIP level)
 sip.addSchema(New IPFile(Paths.get("test\resources\eark\schema.xsd")))
+
 ' 1.6) add documentation (SIP level)
 sip.addDocumentation(New IPFile(Paths.get("test\resources\eark\documentation.pdf")))
+
 ' 1.7) set optional RODA related information about ancestors
 sip.setAncestors(Arrays.asList("b6f24059-8973-4582-932d-eb0b2cb48f28"))
+
 ' 1.8) add an agent (SIP level)
 Dim agent = New IPAgent("Agent Name", "OTHER", "OTHER ROLE", CreatorType.INDIVIDUAL, "OTHER TYPE")
 sip.addAgent(agent)
+
 ' 1.9) add a representation (status will be set to the default value, i.e.,
 ' ORIGINAL)
 Dim representation1 = New IPRepresentation("representation 1")
 sip.addRepresentation(representation1)
+
 ' 1.9.1) add a file to the representation
 Dim representationFile = New IPFile(Paths.get("test\resources\eark\documentation.pdf"))
 representationFile.setRenameTo("data_.pdf")
@@ -110,35 +122,39 @@ Dim representationFileEnc3 = New IPFile(Paths.get("test\resources\eark\documenta
 representation1.addFile(representationFileEnc3)
 Dim representationFileEnc4 = New IPFile(Paths.get("test\resources\eark\documentation.pdf"))
 representation1.addFile(representationFileEnc4)
+
 ' 1.9.2) add a file to the representation and put it inside a folder
 ' called 'abc' which has a folder inside called 'def'
 Dim representationFile2 = New IPFile(Paths.get("test\resources\eark\documentation.pdf"))
 representationFile2.setRelativeFolders(Arrays.asList("abc", "def"))
 representation1.addFile(representationFile2)
+
 ' 1.10) add a representation & define its status
 Dim representation2 = New IPRepresentation("representation 2")
 sip.addRepresentation(representation2)
+
 ' 1.10.1) add a file to the representation
 Dim representationFile3 = New IPFile(Paths.get("test\resources\eark\documentation.pdf"))
 representationFile3.setRenameTo("data3.pdf")
 representation2.addFile(representationFile3)
+
 ' 2) build SIP, providing an output directory
 Dim zipSIP = sip.build(Paths.get(""))
 ```
 
 ## Performance
-The biggest problem of this approach is the performance. The performance was measured by creating E-ARK SIP packages, on the same machine, using the java library, and the .NET library (the test project is available in the root *commons-ip-dotnet-test* folder). Three scenarios were considered for the performed tests:
-1. using the java library;
-2. using the .NET library, loading the IKVM package at the same moment of the E-ARK SIP package creation;
-3. using the .NET library, pre-loading the IKVM package before the moment of the E-ARK SIP package creation;
+The performance was measured by creating E-ARK SIP packages, on the same machine, using the java library, and the .NET library (the test project is available in the root *commons-ip-dotnet-test* folder). Three scenarios were considered for the performed tests:
+1. using the **Java library**;
+2. using the **.NET library**, loading IKVM package at the same moment of the E-ARK SIP package creation;
+3. using the **.NET library, pre-loading IKVM** package before the moment of the E-ARK SIP package creation;
 
 For each scenario, 3 tests were performed, and following table shows the respective results:
 
-| Test number        | Scenario 1 | Scenario 2 | Scenario 3 |
-|:-------------:|:-------------:|:-----:|:-----:|
-| 1      | 758 ms | 3994 ms | 1629 ms |
-| 2      | 815 ms | 4015 ms | 1601 ms |
-| 3      | 870 ms | 3884 ms | 1617 ms |
+| Test iteration | Java library | .NET library | .NET library, pre-loading IKVM |
+|:--------------:|:------------:|:------------:|:------------------------------:|
+| 1              | 758 ms       | 3994 ms      | 1629 ms                        |
+| 2              | 815 ms       | 4015 ms      | 1601 ms                        |
+| 3              | 870 ms       | 3884 ms      | 1617 ms                        |
 
 As expected, using the java library is the quickest way to obtain the E-ARK SIP packages (an average around 800 milliseconds). 
 
