@@ -23,10 +23,10 @@ To run the application you must comply with the following environment requiremen
 
 Download `commons-ip-dotnet-demo.zip` from [latest release](https://github.com/keeps/commons-ip-dotnet/releases/latest). Right-click and select Extract here. Open folder and execute file `commons-ip-dotnet-demo.exe`.
 
-TODO screenshot here.
+![Demo main window](https://github.com/keeps/commons-ip-dotnet/tree/master/docs/images/01-application-info.png)
 
 The application allows you to create E-ARK SIP files from your own files. In order to create these packages, you'll have to perform the following tasks (as presented in the application): 
- * **Set package info:** set the package basic information (eg. identification, description, creator info).
+ * **Set package description:** set the package basic information (eg. identification, description, creator info).
  * **Select descriptive metadata file:** select descriptive metadata file and select the  descriptive metadata file type. The application **does not perform any validations** regarding the selected file and metadata type. The metadata types are the ones available in the original commons-ip implementation (eg. EAD, EAC-CPF).
  * **(Optional) select other metadata files:**  select other metadata files to add to the package (eg. information about how files were created and stored, intellectual property rights).
  * **Select package representation content:** add all the package files and/or folders into one representation. You can drop files or folders containing files (folders with sub-folders will be discarded). You can also rename the representation name (default value is "Representation"). 
@@ -190,7 +190,7 @@ ikvmc.exe -target:library (PATH-JAR-FILE) -recurse:(FOLDER-PATH-WITH-JAR-DEPENDE
 * (OUTPUT-DLL-FILENAME) - Set the filename of .dll output (ex. commons-ip-1.0.3.dll);
 To see all commons-ip jar dependencies please see the [pom.xml](https://github.com/keeps/commons-ip/blob/master/pom.xml) file and find all dependencies/versions.
 
-**Note:** Don't worry about the **warnings** when the previous command is executed, check only if an error occurred.
+**Note:** Don't worry about the **warnings**. When the previous command is executed, check only if an error occurred.
 
 
 ## Credits
