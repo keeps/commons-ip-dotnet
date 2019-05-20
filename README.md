@@ -23,7 +23,7 @@ To run the application you must comply with the following environment requiremen
 
 Download `commons-ip-dotnet-demo.zip` from [latest release](https://github.com/keeps/commons-ip-dotnet/releases/latest). Right-click and select Extract here. Open folder and execute file `commons-ip-dotnet-demo.exe`.
 
-![Demo main window](docs/images/01-application-info.png)
+![Demo main window](docs/images/05-representation-files.png)
 
 The application allows you to create E-ARK SIP files from your own files. In order to create these packages, you'll have to perform the following tasks (as presented in the application): 
  * **Set package description:** set the package basic information (eg. identification, description, creator info).
@@ -39,7 +39,7 @@ The project source code is available in the root `commons-ip-dotnet` folder.
 ### Requirements
 To use this project, you must comply with the following environment requirements:
 * Microsoft Windows (7 or above)
-* Visual Studio (2015 or above)
+* Visual Studiod (2015 or above)
 * .NET Framework (4.7.2 or above)
 
 ### Dependencies
@@ -162,11 +162,13 @@ Because the approach of using a java library wrapper to use as a .NET library, i
 
 
 ## Development
-Given the genesis of the *commons-ip* API creation, there were two approaches for moving the library to the .NET framework. Initially the scenario of creating a new library in the target technology was evaluated, however, due to the time it would take to create the new API, and the fact that new developments led to double the effort to maintain 2 different technological solutions, we chose to take advantage of the work up to date, and use the existing API as the basis of the new API.
+Given the genesis of the `commons-ip` API creation, there were two approaches for moving the library to the .NET framework. Initially the scenario of creating a new library in the target technology was evaluated, however, due to the time it would take to create the new API, and the fact that new developments led to double the effort to maintain 2 different technological solutions, we chose to take advantage of the work up to date, and use the existing API as the basis of the new API.
 
 This implies that, at the performance level, it will be a slower solution to generate the submission packages, but on the upperside, new features added to the java version of the API can be (almost) immediatelly used in the .NET API. It will only require to create the new DLL file by using IKVM.
 
+
 ### Requirements
+
 * **Commons-IP (Java):** The base of this project is the implementation of [E-ARK IP manipulation java library](https://github.com/keeps/commons-ip). The current application uses somes strategies to use a wrapper of that project in order to use apply it a .NET project.
 
 * **IKVM:** (see description above).
@@ -176,12 +178,12 @@ This implies that, at the performance level, it will be a slower solution to gen
 ### Compile new commons-ip-x.x.x.dll
 IKVM has a large number of aplications and functionalities. In this project, the propose is to create a dll file from a jar library that is possible to import into a .Net project and use it without any complication or major setup.
 
-Below are the bash commands to apply in order to create a new *.dll file from the jar libraries
+Below are the bash commands to apply in order to create a new DLL file from the jar libraries
 
 ```bash
 ikvmc.exe #to view help command
 ``` 
-In the previous version of java (< 8), (-recurse) parameter is not needed because only is needed a jar with all dependencies inside. In case of java 8 a jar library and a folder with all 3rd party jar files are used.
+In the previous version of java (below version 8), *-recurse* parameter is not needed because only is needed a jar with all dependencies inside. In case of java 8 a jar library and a folder with all 3rd party jar files are used.
 ```bash
 ikvmc.exe -target:library (PATH-JAR-FILE) -recurse:(FOLDER-PATH-WITH-JAR-DEPENDENCIES) -out:(OUTPUT-DLL-FILENAME)
 ```
