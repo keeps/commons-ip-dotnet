@@ -1,5 +1,5 @@
 # E-ARK IP manipulation .NET library
-API to manipulate OAIS Information Packages of different formats: E-ARK, BagIt, Hungarian type 4 SIP.
+.NET API to manipulate OAIS Information Packages of different formats: E-ARK, BagIt, Hungarian type 4 SIP.
 
 The E-ARK Information Packages are maintained by the Digital Information LifeCycle Interoperability Standards Board (DILCIS Board). DILCIS Board is an international group of experts committed to maintain and sustain maintain a set of interoperability specifications which allow for the transfer, long-term preservation, and reuse of digital information regardless of the origin or type of the information.
 
@@ -14,8 +14,27 @@ The DILCIS Board collaborates closely with the Swiss Federal Archives in regard 
 
 For more information about the E-ARK Information Packages specifications, please visit [http://www.dilcis.eu/](http://www.dilcis.eu/)
 
+## Run demonstration example
 
-## Instalation
+### Requirements
+To run the application you must comply with the following environment requirements:
+* Microsoft Windows (7 or above)
+* .NET Framework (4.7.2 or above)
+
+Download `commons-ip-dotnet-demo.zip` from [latest release](https://github.com/keeps/commons-ip-dotnet/releases/latest). Right-click and select Extract here. Open folder and execute file `commons-ip-dotnet-demo.exe`.
+
+TODO screenshot here.
+
+The application allows you to create E-ARK SIP files from your own files. In order to create these packages, you'll have to perform the following tasks (as presented in the application): 
+ * **Set package info:** set the package basic information (eg. identification, description, creator info).
+ * **Select descriptive metadata file:** select descriptive metadata file and select the  descriptive metadata file type. The application **does not perform any validations** regarding the selected file and metadata type. The metadata types are the ones available in the original commons-ip implementation (eg. EAD, EAC-CPF).
+ * **(Optional) select other metadata files:**  select other metadata files to add to the package (eg. information about how files were created and stored, intellectual property rights).
+ * **Select package representation content:** add all the package files and/or folders into one representation. You can drop files or folders containing files (folders with sub-folders will be discarded). You can also rename the representation name (default value is "Representation"). 
+ * **Select destination file and create package:** create the EARK-SIP file by choosing where the file will be saved.
+
+The project source code is available in the root `commons-ip-dotnet` folder.
+
+## Use as a library
 
 ### Requirements
 To use this project, you must comply with the following environment requirements:
@@ -29,7 +48,7 @@ In this section it's specified 3rd party libraries necessary to use this package
 * **NuGet manager:** 
 NuGet is the package manager for .NET. The NuGet client tools provide the ability to produce and consume packages. The NuGet Gallery is the central package repository used by all package authors and consumers.
 Read more information at [https://www.nuget.org/](https://www.nuget.org/). 
-Download the package at [https://www.nuget.org/downloads ](https://www.nuget.org/downloads)
+Download the package at [https://www.nuget.org/downloads](https://www.nuget.org/downloads)
 
 * **IKVM:** IKVM.NET is an implementation of Java for Mono and the Microsoft .NET Framework. It includes the following components
     * A Java Virtual Machine implemented in .NET
@@ -37,31 +56,15 @@ Download the package at [https://www.nuget.org/downloads ](https://www.nuget.org
     * Tools that enable Java and .NET interoperability
 
     For more information see [http://www.ikvm.net/](http://www.ikvm.net/).
-
-    Download the correct version of IKVM. The IKVM version needs to be the same as JDK. The current base project uses JDK 1.8, so the download needs to be IKVM 8 from [http://www.frijters.net/ikvmbin-8.1.5717.0.zip](http://www.frijters.net/ikvmbin-8.1.5717.0.zip)
-
-* **Commons-IP (Java):** The base of this project is the implementation of [E-ARK IP manipulation java library](https://github.com/keeps/commons-ip). The current application uses somes strategies to use a wrapper of that project in order to use apply it a .NET project.
+    IKVM is automatically installed by NuGet in the next step.
 
 
-## Application usage
-The application allows you to create E-ARK SIP files from your own files. In order to create these packages, you'll have to perform the following tasks (each one presented in the application respective form): 
- * **Set package info:** set the package basic information (eg. identification, description, creator info).
- * **Select descriptive metadata file:** select descriptive metadata file and select the respective descriptive metadata file type. The application **does not perform any validations** regarding the selected file and metadata type. The metadata types are the ones available in the original commns-ip implementation (eg. EAD, EAC-CPF).
- * **(Optional) select other metadata files:**  select other metadata files to add to the package (eg. information about how files were created and stored, intellectual property rights).
- * **Select package representation content:** add all the package files and/or folders into one representation. You can drop files, or folders containing files (folders with sub-folders will be discarded). You can also rename the representation name (default value is "Representation"). 
- * **Select destination file and create package:** create the EARK-SIP file by choosing where the file will be saved.
+### Download DLL
+Download `commons-ip-X.X.X.dll` from [latest release](https://github.com/keeps/commons-ip-dotnet/releases/latest) and import it into your project. Also, the *NuGet* must be configured to import the IKVM library to your project.
 
-<!--
-After modifying this form, the selection control will be of a tree view. In this case, replace the following description:
-* **Select package representation content:** select the root folder to add to the package representation. All the files or sub-folders will be included in the representation.
--->
-The project source code is available in the root *commons-ip-dotnet* folder.
+### Write some code
 
-
-## Write some code
-You must import the commons-ip dll file into your project. This file is already available in the root *target* folder, under the name *commons-ip-X.X.X.dll*, corresponding to the current commons-ip java aplication version. Also, the *NuGet* must be configured to import the IKVM library to your project.
-
-* Create a full E-ARK SIP
+Create a full E-ARK SIP
 ``` vb
 ' 1) instantiate E-ARK SIP object
 Dim sip = New EARKSIP("SIP_1", IPContentType.getMIXED())
@@ -123,7 +126,6 @@ representation2.addFile(representationFile3)
 Dim zipSIP = sip.build(Paths.get(""))
 ```
 
-
 ## Performance
 The biggest problem of this approach is the performance. The performance was measured by creating E-ARK SIP packages, on the same machine, using the java library, and the .NET library (the test project is available in the root *commons-ip-dotnet-test* folder). Three scenarios were considered for the performed tests:
 1. using the java library;
@@ -146,7 +148,14 @@ Because the approach of using a java library wrapper to use as a .NET library, i
 ## Development
 Given the genesis of the *commons-ip* API creation, there were two approaches for moving the library to the .NET framework. Initially the scenario of creating a new library in the target technology was evaluated, however, due to the time it would take to create the new API, and the fact that new developments led to double the effort to maintain 2 different technological solutions, we chose to take advantage of the work up to date, and use the existing API as the basis of the new API.
 
-This implies that, at the performance level, it will be a slower solution to generate the submission packages, but on the upperside, new features added to the java version of the API can be (almost) immediatelly used in the .NET API. It will only require to create the new *.dll file by using IKVM.
+This implies that, at the performance level, it will be a slower solution to generate the submission packages, but on the upperside, new features added to the java version of the API can be (almost) immediatelly used in the .NET API. It will only require to create the new DLL file by using IKVM.
+
+### Requirements
+* **Commons-IP (Java):** The base of this project is the implementation of [E-ARK IP manipulation java library](https://github.com/keeps/commons-ip). The current application uses somes strategies to use a wrapper of that project in order to use apply it a .NET project.
+
+* **IKVM:** (see description above).
+    Download the correct version of IKVM. The IKVM version needs to be the same as JDK. The current base project uses JDK 1.8, so the download needs to be IKVM 8 from [http://www.frijters.net/ikvmbin-8.1.5717.0.zip](http://www.frijters.net/ikvmbin-8.1.5717.0.zip)
+
 
 ### Compile new commons-ip-x.x.x.dll
 IKVM has a large number of aplications and functionalities. In this project, the propose is to create a dll file from a jar library that is possible to import into a .Net project and use it without any complication or major setup.
@@ -166,14 +175,10 @@ ikvmc.exe -target:library (PATH-JAR-FILE) -recurse:(FOLDER-PATH-WITH-JAR-DEPENDE
 To see all commons-ip jar dependencies please see the [pom.xml](https://github.com/keeps/commons-ip/blob/master/pom.xml) file and find all dependencies/versions.
 
 **Note:** Don't worry about the **warnings** when the previous command is executed, check only if an error occurred.
-<!--
-The file run.ps1 (Powershell script) download, extract (IKVM 8) and create the commons-ip.dll into target folder. That dll file is used into commons-ip-dotnet project to create a SIP.zip file from a .net Windows application.
--->
 
 
 ## Credits
- * Paulo Lima (KEEP SOLUTIONS)
-
+Paulo Lima (KEEP SOLUTIONS), Rui Rodrigues (KEEP SOLUTIONS).
 
 ## License
-LGPLv3
+[LGPLv3](https://opensource.org/licenses/lgpl-3.0.html)
