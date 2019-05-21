@@ -26,9 +26,9 @@ Download `commons-ip-dotnet-demo.zip` from [latest release](https://github.com/k
 ![Demo application printscreen - add representation](docs/images/05-representation-files.png)
 
 The application allows you to create E-ARK SIP files from your own files. In order to create these packages, you'll have to perform the following tasks (as presented in the application): 
- * **Set package description:** set the package basic information (eg. identification, description, creator info).
- * **Select descriptive metadata file:** select descriptive metadata file and select the  descriptive metadata file type. The application **does not perform any validations** regarding the selected file and metadata type. The metadata types are the ones available in the original commons-ip implementation (eg. EAD, EAC-CPF).
- * **(Optional) select other metadata files:**  select other metadata files to add to the package (eg. information about how files were created and stored, intellectual property rights).
+ * **Set package description:** set the package basic information (e.g. identification, description, creator info).
+ * **Select descriptive metadata file:** select descriptive metadata file and select the  descriptive metadata file type. The application **does not perform any validations** regarding the selected file and metadata type. The metadata types are the ones available in the original commons-ip implementation (e.g. EAD, EAC-CPF).
+ * **(Optional) select other metadata files:**  select other metadata files to add to the package (e.g. information about how files were created and stored, intellectual property rights).
  * **Select package representation content:** add all the package files and/or folders into one representation. You can drop files or folders containing files (folders with sub-folders will be discarded). You can also rename the representation name (default value is "Representation"). 
  * **Select destination file and create package:** create the EARK-SIP file by choosing where the file will be saved.
 
@@ -39,7 +39,7 @@ The project source code is available in the root `commons-ip-dotnet` folder.
 ### Requirements
 To use this project, you must comply with the following environment requirements:
 * Microsoft Windows (7 or above)
-* Visual Studiod (2015 or above)
+* Visual Studio (2015 or above)
 * .NET Framework (4.7.2 or above)
 
 ### Dependencies
@@ -50,7 +50,7 @@ NuGet is the package manager for .NET. The NuGet client tools provide the abilit
 Read more information at [https://www.nuget.org/](https://www.nuget.org/). 
 Download the package at [https://www.nuget.org/downloads](https://www.nuget.org/downloads)
 
-* **IKVM:** IKVM.NET is an implementation of Java for Mono and the Microsoft .NET Framework. It includes the following components
+* **IKVM:** IKVM.NET is an implementation of Java for Mono and the Microsoft .NET Framework. It includes the following components.
     * A Java Virtual Machine implemented in .NET
     * A .NET implementation of the Java class libraries
     * Tools that enable Java and .NET interoperability
