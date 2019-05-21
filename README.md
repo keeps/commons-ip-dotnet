@@ -21,7 +21,7 @@ To run the application you must comply with the following environment requiremen
 * Microsoft Windows (7 or above)
 * .NET Framework (4.7.2 or above)
 
-Download `commons-ip-dotnet-demo.zip` from [latest release](https://github.com/keeps/commons-ip-dotnet/releases/latest). Right-click and select Extract here. Open folder and execute file `commons-ip-dotnet-demo.exe`.
+Download `commons-ip-dotnet-demo.zip` from the [latest release](https://github.com/keeps/commons-ip-dotnet/releases/latest). Right-click and select Extract here. Open folder and execute file `commons-ip-dotnet-demo.exe`.
 
 ![Demo application printscreen - add representation](docs/images/05-representation-files.png)
 
@@ -158,13 +158,13 @@ For each scenario, 3 tests were performed, and following table shows the respect
 
 As expected, using the java library is the quickest way to obtain the E-ARK SIP packages (an average around 800 milliseconds). 
 
-Because the approach of using a java library wrapper to use as a .NET library, it was expcted to have a delay (because of the usage of a virtual machine). Still, there are some good coding policies to be taken into account when using this library, namely to load in memory the IKVM package before procedding to the SIP creation, as we can conclude from the obtained results.
+Because the approach of using a java library wrapper to use as a .NET library, it was expected to have a delay (because of the usage of a virtual machine). Still, there are some good coding policies to be taken into account when using this library, namely to load in memory the IKVM package before proceedding to the SIP creation, as we can conclude from the obtained results.
 
 
 ## Development
 Given the genesis of the `commons-ip` API creation, there were two approaches for moving the library to the .NET framework. Initially the scenario of creating a new library in the target technology was evaluated, however, due to the time it would take to create the new API, and the fact that new developments led to double the effort to maintain 2 different technological solutions, we chose to take advantage of the work up to date, and use the existing API as the basis of the new API.
 
-This implies that, at the performance level, it will be a slower solution to generate the submission packages, but on the upperside, new features added to the java version of the API can be (almost) immediatelly used in the .NET API. It will only require to create the new DLL file by using IKVM.
+This implies that, at the performance level, it will be a slower solution to generate the submission packages, but on the upper side, new features added to the java version of the API can be (almost) immediately used in the .NET API. It will only require to create the new DLL file by using IKVM.
 
 
 ### Requirements
@@ -176,9 +176,9 @@ This implies that, at the performance level, it will be a slower solution to gen
 
 
 ### Compile new commons-ip-x.x.x.dll
-IKVM has a large number of aplications and functionalities. In this project, the propose is to create a dll file from a jar library that is possible to import into a .Net project and use it without any complication or major setup.
+IKVM has a large number of applications and functionalities. In this project, the propose is to create a dll file from a jar library that is possible to import into a .Net project and use it without any complication or major setup.
 
-Below are the bash commands to apply in order to create a new DLL file from the jar libraries
+Below are the bash commands to apply in order to create a new DLL file from the jar libraries.
 
 ```bash
 ikvmc.exe #to view help command
