@@ -32,7 +32,7 @@ The application allows you to create E-ARK SIP files from your own files. In ord
  * **Select package representation content:** add all the package files and/or folders into one representation. You can drop files or folders containing files (folders with sub-folders will be discarded). You can also rename the representation name (default value is "Representation"). 
  * **Select destination file and create package:** create the EARK-SIP file by choosing where the file will be saved.
 
-The project source code is available in the root `commons-ip-dotnet` folder.
+The project source code is available in the root `commons-ip-dotnet-demo` folder (soluton file is the root `commons-ip-dotnet-demo.sln` file).
 
 ## Use as a library
 
@@ -192,7 +192,7 @@ ikvmc.exe -target:library (PATH-JAR-FILE) -recurse:(FOLDER-PATH-WITH-JAR-DEPENDE
 * (OUTPUT-DLL-FILENAME) - Set the filename of .dll output (ex. commons-ip-1.0.3.dll);
 To see all commons-ip jar dependencies please see the [pom.xml](https://github.com/keeps/commons-ip/blob/master/pom.xml) file and find all dependencies/versions.
 
-**Note:** Don't worry about the **warnings**. When the previous command is executed, check only if an error occurred.
+**Note:** when the previous command is executed, you can discard the **warnings**. However, you must check if any errors occurred during the execution.
 
 
 ## Credits
