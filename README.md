@@ -1,5 +1,6 @@
 **THIS PROJECT HAS BEEN ARCHIVED AND REPLACED BY [E-ARK SIP DOTNET](https://github.com/igfej-justica-gov-pt/dotnet-eark-sip)**
 
+---
 
 
 # E-ARK IP manipulation .NET library
