@@ -1,3 +1,7 @@
+**THIS PROJECT HAS BEEN ARCHIVED AND REPLACED BY [E-ARK SIP DOTNET](https://github.com/igfej-justica-gov-pt/dotnet-eark-sip)**
+
+
+
 # E-ARK IP manipulation .NET library
 .NET API to manipulate OAIS Information Packages of different formats: E-ARK, BagIt, Hungarian type 4 SIP.
 
